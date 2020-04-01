@@ -36,7 +36,7 @@ AHVブートキャンプのNutanix Citrixへようこそ！この演習では、
 
 この演習を経て、Nutanix Enterprise Cloudスタックを構成するコアの概念とテクノロジーを理解し、さらにCitrixを利用したVDIの管理手法について学ぶことができます。
 
-Agenda
+アジェンダ
 ++++++
 
 - イントロダクション
