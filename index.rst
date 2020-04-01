@@ -30,7 +30,7 @@
 .. _getting_started:
 
 ---------------
-Getting Started
+Sato san is AWESOME ようこそ
 ---------------
 
 Welcome to the Nutanix Citrix on AHV Bootcamp! This workbook accompanies an instructor-led session that introduces Nutanix and Citrix technologies and many common management tasks.
@@ -162,7 +162,7 @@ Each cluster has a dedicated domain controller VM, **DC**, responsible for provi
 .. list-table::
    :widths: 25 35 40
    :header-rows: 1
-   
+
    * - Group
      - Username(s)
      - Password
