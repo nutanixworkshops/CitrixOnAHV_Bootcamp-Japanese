@@ -32,13 +32,6 @@
 ---------------
 はじめに
 ---------------
-
-Welcome to the Nutanix Citrix on AHV Bootcamp! This workbook accompanies an instructor-led session that introduces Nutanix and Citrix technologies and many common management tasks.
-
-You will explore Prism Element and become familiar with its features and navigation. You will use Prism to perform basic cluster administration tasks, including storage and networking. You will also walk through basic VM deployment and management tasks with Prism and AHV. Finally, you will explore VM data protection, including snapshots and replication. The instructor explains the exercises and answers any additional questions that you may have.
-
-At the end of the bootcamp, attendees should understand the Core concepts and technologies that make up the Nutanix Enterprise Cloud stack and should be well prepared for a hosted or onsite proof-of-concept (POC) engagement.
-
 AHVブートキャンプのNutanix Citrixへようこそ！この演習では、NutanixとCitrixのテクノロジーを利用して、一般的なVDIにおける管理タスクを体験頂きます。
 
 この演習を経て、Nutanix Enterprise Cloudスタックを構成するコアの概念とテクノロジーを理解し、さらにCitrixを利用したVDIの管理手法について学ぶことができます。
