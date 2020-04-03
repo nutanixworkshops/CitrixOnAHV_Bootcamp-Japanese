@@ -1,76 +1,71 @@
 .. _citrixgoldimage:
 
 ------------------------------------
-Building & Optimizing the Gold Image
+ゴールドイメージの構築と最適化
 ------------------------------------
 
-When we install a vanilla client operating system, we need to keep in mind that this OS was built for physical devices (i.e. laptops and desktops), with direct attached devices and limited noisy neighbor effects. If we install that same OS in a VM we might see different results, hence the need for optimization. The Nutanix Performance/Solutions Engineering team for EUC has tested various optimizations and the lab, and validated the following results:
+Windows Client OSは通常物理デバイス上（ラップトップPCなど）で動作することを前提としており、ハードウェアデバイスに直接接続され、また同ホスト上の負荷が高い仮想マシンに影響を受けるなどが発生しないことを想定しております。そのため、そのOSをVMとしてインストールすると想定外の動作をする可能性があり、仮想環境上で動作させるための最適化が必要です。
 
-.. figure:: images/19.png
+この演習では、Windows 10 VMにCitrix Virtual Desktop Agentをインストールし、Citrix OptimizerとVMware OS Optimization Toolの両方を使用してVMを最適化します。
 
-As you can see there’s a 48% improvement of desktop density per node when applying baseline Citrix optimizations, and increases to 57% with a second pass using VMware OS optimization recommendations. Note that both sets of optimizations are independent of underlying hypervisor, and rather tune services within the OS guest.
-
-**In this lab you will install the Citrix Virtual Desktop Agent on a Windows 10 VM, and optimize the VM using both the Citrix Optimizer and VMware OS Optimization Tool.**
-
-Deploying a VM
+ゴールドイメージ用VMの構築
 ++++++++++++++
 
-#. In **Prism Central**, select :fa:`bars` **> Virtual Infrastructure > VMs**.
+#. Prism Centralで :fa:`bars` > **仮想インフラ（Virtual Infrastructure）** > **仮想マシン（VMs）** を選択。
 
    .. figure:: images/1.png
 
-#. Click **Create VM**.
+#. **仮想マシンを作成（Create VM）**をクリック。
 
-#. Select your assigned cluster and click **OK**.
-
-#. Fill out the following fields:
+#. 以下を入力する:
 
    - **Name** - *Initials*\ -GoldImage
-   - **Description** - (Optional) Description for your VM.
+   - **Description** - (オプション) WinToolsVM.
    - **vCPU(s)** - 2
    - **Number of Cores per vCPU** - 1
    - **Memory** - 4 GiB
 
-   - Select **+ Add New Disk**
-       - **Type** - DISK
-       - **Operation** - Clone from Image Service
-       - **Image** - Win10v1903.qcow2
-       - Select **Add**
+   - **+ Add New Disk** をクリック
+       - **Type（タイプ）** - DISK
+       - **Operation（オペレーション）** - Clone from Image Service（イメージサービスからクローン）
+       - **Image（イメージ）** - Win10v1903.qcow2
+       - **Add** をクリック
 
-   - Select **Add New NIC**
+   - **Add New NIC** をクリック
        - **VLAN Name** - Secondary
-       - Select **Add**
+       - **Add** をクリック
 
-#. Click **Save** to create the VM.
+#. **Save** をクリックしVMを作成する.
 
-#. Select your VM and click **Power On**.
+#. 作成したVMのチェックボックスをクリックし **Actions（アクション） > Power On（パワーオン）** .
 
 .. _CtxPausingUpdates:
 
-Pausing Updates
+Windows Updatesの停止
 +++++++++++++++
 
-Before starting to build your **Windows 10** image it is important the ensure that no Windows Updates are in progress, as this can cause issues with cloning.
+Windows 10ゴールドイメージの構築を開始する前に、Windows Updateが進行中でないことを確認することが重要です。Windows Updateによりクローン作成で問題が発生する可能性があります。
 
-#. Open the VM console or connect via RDP.
+#. 作成したVMのチェックボックスをクリックし **Actions（アクション） > Launch Console（コンソールの起動）**
 
    - **User Name** - Nutanix
    - **Password** - nutanix/4u
 
-#. Open **System Settings > Windows Update** and click **Pause Updates for 7 Days**.
+#. **System Settings > Windows Update** を開き**Pause Updates for 7 Days** をクリックする。
 
    .. figure:: images/24.png
 
-#. Restart the VM.
+#. VMを再起動する。
 
-Installing the VDA
+VDAのインストール
 ++++++++++++++++++
 
-The Virtual Delivery Agent (VDA) is a collection of drivers and services installed on each physical or virtual machine available for user connection. The VDA allows the machine to register with the Delivery Controller, allowing the Delivery Controller to assign those resources to users. The VDA is also responsible for establishing the HDX connection, the Citrix remoting protocol, between the machine and the user device, verifying licensing, and applying Citrix Policy.
+Virtual Delivery Agent（VDA）は、ユーザー各物理マシンまたは仮想マシンに接続時に必要なドライバーとサービスのコレクションです。VDAにより、仮想デスクトップ用のマシンをDelivery Controllerに登録して、またDelivery Controllerがこれらのマシンをユーザーに割り当てることができます。VDAは、マシンとユーザーデバイス間のHDX接続、Citrixリモートプロトコルの確立、ライセンスの確認、Citrixポリシーの適用も担当します。
 
-#. Once the VM has restarted, reconnect to the VM console or connect via RDP.
+#. VMのコンソールで再起動完了を確認する。
 
-#. Change the **Computer Name** (e.g. *Initials*\ -GoldImage) and join the **NTNXLAB.local** domain using the following credentials:
+#. **Computer Name** (e.g. *Initials*\ -GoldImage) を変更し以下の資格情報で**NTNXLAB.local** に参加する:
+※検索ボックスで[ about ]と検索し、About画面下のRelated settingsの[System info]をクリックすることで該当画面に遷移できます。
 
    - **User Name** - NTNXLAB\\Administrator
    - **Password** - nutanix/4u
