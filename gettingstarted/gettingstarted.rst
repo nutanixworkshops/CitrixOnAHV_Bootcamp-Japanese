@@ -20,28 +20,26 @@ Windows Tools VMのデプロイ
 
 #. **仮想マシンを作成（Create VM）**をクリック
 
-#. Select your assigned cluster and click **OK**.
-
-#. Fill out the following fields:
+#. 以下を入力する:
 
    - **Name** - *Initials*-WinToolsVM
-   - **Description** - (Optional) Description for your VM.
+   - **Description** - (オプション) WinToolsVM.
    - **vCPU(s)** - 2
    - **Number of Cores per vCPU** - 1
    - **Memory** - 4 GiB
 
-   - Select **+ Add New Disk**
-      - **Type** - DISK
-      - **Operation** - Clone from Image Service
-      - **Image** - WinToolsVM.qcow2
-      - Select **Add**
+   - **+ Add New Disk**をクリック
+      - **Type（タイプ）** - DISK
+      - **Operation（オペレーション）** - Clone from Image Service（イメージサービスからクローン）
+      - **Image（イメージ）** - WinToolsVM.qcow2
+      - **Add**をクリック
 
-   - Select **Add New NIC**
+   - **Add New NIC**をクリック
       - **VLAN Name** - Secondary
-      - Select **Add**
+      - **Add**をクリック
 
-#. Click **Save** to create the VM.
+#. **Save** をクリックしVMを作成する.
 
-#. Select your VM and click **Actions > Power On**.
+#. 作成したVMのチェックボックスをクリックし **Actions（アクション） > Power On（パワーオン）**.
 
-   Once booted, the VM will automatically complete the Sysprep process, join the **NTNXLAB.local** domain, and log in as the **NTNXLAB\\Administrator** user.
+　　起動すると、自動的にSysprepの処理が走り、**NTNXLAB.local**ドメインに参加し、**NTNXLAB\\Administrator**としてログインします。
