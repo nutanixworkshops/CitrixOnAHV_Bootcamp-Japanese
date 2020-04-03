@@ -1,23 +1,22 @@
 .. _citrixgettingstarted:
 
 ----------------------
-Getting Started
+はじめに
 ----------------------
 
-Welcome to the End User Computing bootcamp featuring Citrix Apps & Desktops. This bootcamp is meant to provide you with first hand experience in why Nutanix is an ideal platform for Citrix workloads. In addition to the benefits than Nutanix HCI brings to any virtual desktop deployment, such as linear scalability and consistent performance, Nutanix brings additional benefits that you'll explore through labs:
+Citrix Apps＆Desktopsをフィーチャーしたエンドユーザーコンピューティングブートキャンプへようこそ。このブートキャンプは、NutanixがCitrixワークロードに理想的なプラットフォームである理由を体験することを目的としています。
+Nutanix HCIのスケーラビリティや一貫したパフォーマンスなど、仮想デスクトップにもたらす利点に加えて、以下に記載するような利点を体験頂きます。
 
-- Native tools for migrating existing desktop images from ESXi
-- Citrix integration with AHV to provide a no-cost, easy to manage platform for desktop virtualization
-- Fast desktop provisioning, including rolling out image updates to large pools of desktops
-- Native file services with Nutanix Files to deliver user data, profiles, and User Personalization Layers
-- Native microsegmentation with Nutanix Flow to secure a virtual desktop environment
-- Rich monitoring and automation capabilities with Prism Ops
+- CitrixとライセンスフリーのAHVの統合により、デスクトップ仮想化のための管理しやすいプラットフォームを提供
+- デスクトップの大規模なプールへのイメージ更新の適用を含む、高速なデスクトッププロビジョニング
+- ユーザーデータ、プロファイル、ユーザーパーソナライゼーションレイヤーを提供するNutanix Filesを使用したファイルサービス
+- 仮想デスクトップ環境を保護するためのNutanix Flowによるマイクロセグメンテーション
+- Prism Opsによる豊富な監視および自動化機能
 
-
-Deploying your Windows Tools VM
+Windows Tools VMのデプロイ
 +++++++++++++++++++++++++++++++
 
-#. In **Prism Central**, select :fa:`bars` **> Virtual Infrastructure > VMs**.
+#. **Prism Central**で :fa:`bars` **> 仮想インフラ（Virtual Infrastructure） > 仮想マシン（VMs）**を選択。
 
 #. Click **Create VM**.
 
