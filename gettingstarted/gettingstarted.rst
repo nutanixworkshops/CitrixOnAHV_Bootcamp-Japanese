@@ -16,7 +16,7 @@ Nutanix HCIのスケーラビリティや一貫したパフォーマンスなど
 Windows Tools VMのデプロイ
 +++++++++++++++++++++++++++++++
 
-#. Prism Centralで :fa:`bars` > **仮想インフラ（Virtual Infrastructure）** > **仮想マシン（VMs）**を選択。
+#. Prism Centralで :fa:`bars` > **仮想インフラ（Virtual Infrastructure）** > **仮想マシン（VMs） **を選択。
 
 #. **仮想マシンを作成（Create VM）**をクリック
 
@@ -28,18 +28,18 @@ Windows Tools VMのデプロイ
    - **Number of Cores per vCPU** - 1
    - **Memory** - 4 GiB
 
-   - **+ Add New Disk**をクリック
+   - **+ Add New Disk** をクリック
       - **Type（タイプ）** - DISK
       - **Operation（オペレーション）** - Clone from Image Service（イメージサービスからクローン）
       - **Image（イメージ）** - WinToolsVM.qcow2
-      - **Add**をクリック
+      - **Add** をクリック
 
-   - **Add New NIC**をクリック
+   - **Add New NIC** をクリック
       - **VLAN Name** - Secondary
-      - **Add**をクリック
+      - **Add** をクリック
 
 #. **Save** をクリックしVMを作成する.
 
-#. 作成したVMのチェックボックスをクリックし **Actions（アクション） > Power On（パワーオン）**.
+#. 作成したVMのチェックボックスをクリックし **Actions（アクション） > Power On（パワーオン）** .
 
-　　起動すると、自動的にSysprepの処理が走り、**NTNXLAB.local**ドメインに参加し、**NTNXLAB\\Administrator**としてログインします。
+　　起動すると、自動的にSysprepの処理が走り、**NTNXLAB.local ** ドメインに参加し、**NTNXLAB\\Administrator** としてログインします。
