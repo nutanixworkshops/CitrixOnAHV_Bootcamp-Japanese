@@ -16,7 +16,7 @@ Nutanix HCIのスケーラビリティや一貫したパフォーマンスなど
 Windows Tools VMのデプロイ
 +++++++++++++++++++++++++++++++
 
-#. Prism Centralで **:fa:`bars`** > **仮想インフラ（Virtual Infrastructure）** > **仮想マシン（VMs）**を選択。
+#. Prism Centralで :fa:`bars` > **仮想インフラ（Virtual Infrastructure）** > **仮想マシン（VMs）**を選択。
 
 #. **Create VM**.
 
