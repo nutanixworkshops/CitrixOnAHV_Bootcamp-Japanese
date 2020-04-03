@@ -66,8 +66,6 @@ Virtual Delivery Agent（VDA）は、ユーザー各物理マシンまたは仮�
 
 #. **Computer Name** (e.g. *Initials*\ -GoldImage) を変更し以下の資格情報で**NTNXLAB.local** に参加する:
 
-検索ボックスで[ about ]と検索し、About画面下のRelated settingsの[System info]をクリックすることで該当画面に遷移できます。
-
    - **User Name** - NTNXLAB\\Administrator
    - **Password** - nutanix/4u
 
@@ -75,70 +73,73 @@ Virtual Delivery Agent（VDA）は、ユーザー各物理マシンまたは仮�
 
    .. note::
 
-      Open **Control Panel > System and Security > System > Change Settings** to access the traditional Windows domain join field in Windows 10.
+       **Control Panel > System and Security > System > Change Settings** とアクセスすることで上記画面に遷移できます。
 
-#. Restart your VM and log in using the following credentials:
+#. VMを再起動し、以下の資格情報でログイン。:
 
    - **User Name** - NTNXLAB\\Administrator
    - **Password** - nutanix/4u
 
-#. In **Prism Central**, select your GoldImage VM and click **Actions > Update**.
+#. **Prism Central** でゴールドイメージVM のチェックボックスを選択し **Actions（アクション） > Update（更新）** をクリック。
 
    .. figure:: images/2.png
 
-#. Under **Disks > CD-ROM**, select :fa:`pencil` and fill out the following fields:
+#. **Disks > CD-ROM**　を選択し :fa:`pencil` をクリックし以下を入力:
 
-   - **Operation** - Clone from Image Service
-   - **Image** - Citrix_Virtual_Apps_and_Desktops_7_1912.iso
+   - **Operation（オペレーション）** - Clone from Image Service（イメージサービスからクローン）
+   - **Image（イメージ）** - Citrix_Virtual_Apps_and_Desktops_7_1912.iso
 
-#. Click **Update > Save**.
+#. **Update > Save**をクリック。
 
-#. Within the VM console, open **D:\\AutoSelect.exe** to launch the Citrix installer.
+#. ゴールドイメージVMのコンソールにて **D:\\AutoSelect.exe** を開きCitrix installerを起動。
 
    .. figure:: images/3.png
 
-#. Select **Virtual Apps and Desktops > Start**.
+#. **Virtual Apps and Desktops > Start** を選択
 
    .. figure:: images/4.png
 
-#. Select **Prepare Machines and Images** to begin installation of the Virtual Desktop Agent.
+#. **Prepare Machines and Images** を選択し、Virtual Desktop Agentのインストールを開始する。
 
    .. figure:: images/5.png
 
-#. Select **Create a MCS master image** and click **Next**.
+#. **Create a MCS master image** を選択し **Next** をクリック。
 
    .. figure:: images/6.png
 
-#. Under **Core Components**, select **Citrix Workspace App** in addition to the default **Virtual Desktop Agent** selection. Click **Next**.
+#. **Core Components** 画面で、デフォルトの **Virtual Desktop Agent** に加えて **Citrix Workspace App** を選択し **Next** をクリック。
 
    .. figure:: images/6b.png
 
-#. Under **Additional Components**, select **Citrix User Personalization Layer** in addition to the default selections, and click **Next**.
+#. **Additional Components** 画面で、デフォルトに加えて **Citrix User Personalization Layer** を選択し **Next** をクリック。
 
    .. figure:: images/7.png
 
-#. Under **Delivery Controller**, select **Let Machine Creation Services do it automatically** from the drop down, and click **Next**..
+#. **Delivery Controller** 画面で、ドロップダウンから **Let Machine Creation Services do it automatically** を選択し、 **Next** をクリック。
 
    .. figure:: images/8.png
 
-# Under **Features**, click **Next**.
+# **Features** 画面で **Next** をクリック。
 
    .. figure:: images/9.png
 
-#. Allow the installer to automatically configure required Windows Firewall port accessibility, click **Next**.
+#. インストーラーが推奨するファイアーウォール設定をそのまま適用し **Next** をクリック。
 
-#. Click **Install** to begin the VDA installation. This process should take approximately 5 minutes.
+#. **Install** をクリックしVDAのインストールを開始する。 （インストールプロセスは5分ほど要します。）
 
-#. When prompted, de-select **Collect diagnostic information** for Citrix Call Home and click **Next**.
+#. 次の画面に移行したら **Collect diagnostic information** の選択を解除し **Next** をクリック。
 
    .. figure:: images/10.png
 
-#. Click **Finish** and wait for the VM to restart.
+#. **Finish** をクリックしVMの再起動を待ちます。
 
-Running Citrix Optimizer
+Citrix Optimizerの実行
 ++++++++++++++++++++++++
 
-#. Within the VM console, download http://10.42.194.11/workshop_staging/CitrixOptimizer.zip and extract to a directory.
+#. VMコンソール内でブラウザを起動し、http://10.42.194.11/workshop_staging/CitrixOptimizer.zip を入力してダウンロード。
+
+VMコンソール内はUSキーボード配置になっているので注意。
+[:] -> [Shift + ;] , [ _ ] -> [Shift + =]
 
 #. Right-click **CitrixOptimizer.exe** and select **Run as Administrator**.
 
