@@ -15,7 +15,7 @@ Windows Client OSは通常物理デバイス上（ラップトップPCなど）�
 
    .. figure:: images/1.png
 
-#. **仮想マシンを作成（Create VM）**をクリック。
+#. **仮想マシンを作成（Create VM）** をクリック。
 
 #. 以下を入力する:
 
@@ -51,7 +51,7 @@ Windows 10ゴールドイメージの構築を開始する前に、Windows Updat
    - **User Name** - Nutanix
    - **Password** - nutanix/4u
 
-#. **System Settings > Windows Update** を開き**Pause Updates for 7 Days** をクリックする。
+#. **System Settings > Windows Update** を開き **Pause Updates for 7 Days** をクリックする。
 
    .. figure:: images/24.png
 
@@ -65,7 +65,8 @@ Virtual Delivery Agent（VDA）は、ユーザー各物理マシンまたは仮�
 #. VMのコンソールで再起動完了を確認する。
 
 #. **Computer Name** (e.g. *Initials*\ -GoldImage) を変更し以下の資格情報で**NTNXLAB.local** に参加する:
-※検索ボックスで[ about ]と検索し、About画面下のRelated settingsの[System info]をクリックすることで該当画面に遷移できます。
+
+検索ボックスで[ about ]と検索し、About画面下のRelated settingsの[System info]をクリックすることで該当画面に遷移できます。
 
    - **User Name** - NTNXLAB\\Administrator
    - **Password** - nutanix/4u
