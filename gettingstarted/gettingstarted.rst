@@ -18,7 +18,7 @@ Windows Tools VMのデプロイ
 
 #. Prism Centralで :fa:`bars` > **仮想インフラ（Virtual Infrastructure）** > **仮想マシン（VMs）**を選択。
 
-#. **Create VM**.
+#. **仮想マシンを作成（Create VM）**をクリック
 
 #. Select your assigned cluster and click **OK**.
 
