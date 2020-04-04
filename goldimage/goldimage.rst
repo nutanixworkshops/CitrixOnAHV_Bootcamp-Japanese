@@ -139,32 +139,36 @@ Citrix Optimizerの実行
 #. VMコンソール内でブラウザを起動し、http://10.42.194.11/workshop_staging/CitrixOptimizer.zip を入力してダウンロード。
 
 VMコンソール内はUSキーボード配置になっているので注意。
-[:] -> [Shift + ;] , [ _ ] -> [Shift + =]
+[:] -> [Shift + ;] 、 [ _ ] -> [Shift + =]
 
-#. Right-click **CitrixOptimizer.exe** and select **Run as Administrator**.
+#. **CitrixOptimizer.exe** を右クリックし **Run as Administrator** をクリック。
 
    .. figure:: images/12.png
 
-#. Select the recommended optimization template based on the Windows build being used for the gold image.
+#. 3.	ゴールドイメージに使用されているWindowsビルドに基づいて、推奨される(Recommendedと表示の)テンプレートをクリックします。
 
    .. figure:: images/13.png
 
-#. Click **Select All** to select all available optimizations and click **Analyze**.
+#. **Select All** を選択し、クリックして、使用可能なすべての最適化を選択し、 **Analyze** をクリックします。
 
    .. figure:: images/14.png
 
-#. Click **View Results** to see a detailed report of the status of each available optimization.
+#. **View Results** をクリックすると、利用可能な各最適化のステータスの詳細レポートを表示できます。
 
-#. Return to the **Citrix Optimizer** and click **Done > Optimize** to apply the selected optimizations.
+#. **Citrix Optimizer** に戻り、 **Done > Optimize** をクリックして、選択した最適化を適用します。
 
    .. figure:: images/15.png
 
-#. Once the tool has completed, you can click **View Results** to view an updated report. You can now close the tool.
+#. ツールが完了したら、 **View Results** をクリックして、更新されたレポートを表示できます。 **Done** をクリックし、Window右上×ボタンでツールを閉じます。
 
-Running VMware OS Optimization Tool
+VMware OS Optimization Toolの実行
 +++++++++++++++++++++++++++++++++++
 
-#. Within the VM console, download http://10.42.194.11/workshop_staging/VMwareOSOptimizationTool.zip and extract to a directory.
+#. VMコンソール内でブラウザを開き、 http://10.42.194.11/workshop_staging/VMwareOSOptimizationTool.zip にアクセス、ダウンロードし、ダウンロードディレクトリ内に展開します。
+
+VMコンソール内はUSキーボード配置になっているので注意。
+[:] -> [Shift + ;] 、 [ _ ] -> [Shift + =]
+
 
 #. Right-click **VMwareOSOptimizationTool.exe** and select **Run as Administrator**.
 
