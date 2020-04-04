@@ -145,71 +145,74 @@ VMコンソール内はUSキーボード配置になっているので注意。
 
    .. figure:: images/12.png
 
-#. 3.	ゴールドイメージに使用されているWindowsビルドに基づいて、推奨される(Recommendedと表示の)テンプレートをクリックします。
+#. 3.	ゴールドイメージに使用されているWindowsビルドに基づいて、推奨される(Recommendedと表示の)テンプレートをクリック。
 
    .. figure:: images/13.png
 
-#. **Select All** を選択し、クリックして、使用可能なすべての最適化を選択し、 **Analyze** をクリックします。
+#. **Select All** を選択し、クリックして、使用可能なすべての最適化を選択し、 **Analyze** をクリック。
 
    .. figure:: images/14.png
 
-#. **View Results** をクリックすると、利用可能な各最適化のステータスの詳細レポートを表示できます。
+#. **View Results** をクリックすると、利用可能な各最適化のステータスの詳細レポートを表示できる。
 
-#. **Citrix Optimizer** に戻り、 **Done > Optimize** をクリックして、選択した最適化を適用します。
+#. **Citrix Optimizer** に戻り、 **Done > Optimize** をクリックして、選択した最適化を適用。
 
    .. figure:: images/15.png
 
-#. ツールが完了したら、 **View Results** をクリックして、更新されたレポートを表示できます。 **Done** をクリックし、Window右上×ボタンでツールを閉じます。
+#. ツールが完了したら、 **View Results** をクリックして、更新されたレポートを表示できます。 **Done** をクリックし、Window右上×ボタンでツールを閉じる。
 
 VMware OS Optimization Toolの実行
 +++++++++++++++++++++++++++++++++++
 
-#. VMコンソール内でブラウザを開き、 http://10.42.194.11/workshop_staging/VMwareOSOptimizationTool.zip にアクセス、ダウンロードし、ダウンロードディレクトリ内に展開します。
+#. VMコンソール内でブラウザを開き、 http://10.42.194.11/workshop_staging/VMwareOSOptimizationTool.zip にアクセス、ダウンロードし、ダウンロードディレクトリ内に展開する。
 
 VMコンソール内はUSキーボード配置になっているので注意。
 [:] -> [Shift + ;] 、 [ _ ] -> [Shift + =]
 
 
-#. Right-click **VMwareOSOptimizationTool.exe** and select **Run as Administrator**.
+#. **VMwareOSOptimizationTool.exe** を右クリックし、 **Run as Administrator** を選択する。
 
-#. Click the **Select All** checkbox. Scroll down to **Cleanup Jobs** and un-select the 4 available optimizations. Click **Analyze**.
+#. **Select All** のチェックボックスをクリック。 **Cleanup Jobs** の項目までスクロールし、該当の4項目のチェックを外し、 **Analyze** をクリックする。
 
    .. figure:: images/16.png
 
    .. note::
 
-      The Cleanup Jobs are excluded from this exercise as they can be time consuming to apply.
+      クリーンアップジョブは適用に時間がかかる為、今回の演習からは除外します。
 
-#. Note the outstanding optimizations not applied in the **Analysis Summary** pane.
+#. **Analysis Summary** ペインで適用する最適化項目の内訳が確認できます。
 
    .. figure:: images/17.png
 
-#. Click **Optimize** to apply the remaining optimizations.
+#. **Optimize** をクリックし最適化を適用する。
 
    .. figure:: images/18.png
 
-#. Review the results and then restart your Gold Image VM.
+#. 6.	結果を確認して、ゴールドイメージVMを再起動する。
 
-Completing the Gold Image
+ゴールドイメージの完成
 +++++++++++++++++++++++++
 
-XenDesktop provisions pools of desktops based on a hypervisor snapshot of the gold image. Unlike traditional hypervisors which can experience performance degradation from traversing long snapshot chains, Nutanix's redirect-on-write algorithm for implementing snapshots has no such drawback. This difference allows for flexibility in using gold image snapshots to maintain many gold image versions from a single VM. Watch `this video <https://youtu.be/uK5wWR44UYE>`_ for additional details on how Nutanix implements snapshots and cloning.
+Citrix XenDesktopは、ゴールドイメージのスナップショットを利用してデスクトップのプールをプロビジョニングします。
+従来のスナップショットはチェーン構造であり、長いスナップショットチェーンを走査するとパフォーマンスが低下する可能性がありましたが、Nutanixのスナップショットはリダイレクトオンライトアルゴリズムを採用しており、このような欠点はありません。
+この違いにより、ゴールドイメージスナップショットを使用して、単一のVMから多くのゴールドイメージバージョンを維持する柔軟性が得られます。
+※詳細は http://nutanixbible.jp/#anchor-スナップショットとクローン-80 を参照
 
-#. Once restarted, Perform a graceful shutdown of the VM from within the guest.
+#. ゴールドイメージVMの再起動完了後、仮想マシン内からシャットダウンを実行。
 
-#. From **Prism Element**, take a snapshot of the VM (e.g. *Initials Post optimization and VDA install*)
+#. **Prism Element**, からゴールドイメージVMのスナップショットを取得する。 (名前は *Initials Post optimization and VDA install*)
 
    .. figure:: images/20.png
 
    .. note::
 
-      This snapshot **must** be taken from Prism Element in order to be recognized by the Citrix AHV plug-in.
+      このスナップショットは、Citrix AHVプラグインによって認識されるために、Prism Elementから取得する必要があります。
 
-Takeaways
+お持ち帰り
 +++++++++
 
-What are the key things learned in this exercise?
+この演習で学んだ重要なこと
 
-- Using MCS helps simplify the gold image by not having to manually specify (or depend on Active Directory to specify) what XenDesktop Delivery Controller(s) with which the image should attempt to register. This allows more flexibility in having a single gold image support multiple environments without external dependencies.
+- MCSを使用すると、イメージを登録するXenDesktop Delivery Controllerを手動で指定する（またはActive Directoryに依存して指定する）必要がないため、ゴールドイメージを簡素化できます。これにより、単一のゴールドイメージが外部の依存関係なしに複数の環境をサポートする柔軟性が高まります。
 
-- EUC image optimization tools are not solution or hypervisor specific and can be easily applied to improve virtual desktop performance and increase host density.
+- •	EUCイメージ最適化ツールは、ソリューションまたはハイパーバイザー固有ではなく、仮想デスクトップのパフォーマンスを向上させ、ホスト密度（ホストあたりの仮想マシン数）を高めるために簡単に適用できます。
