@@ -30,7 +30,7 @@ XenDesktopサイトには、スケールアウトして大規模化する環境�
 
    .. figure:: images/1.png
 
-#. **Citrix Studio > Configuration > Hosting** を選択し、 **NutanixAcropolis** をクリックします。 **Details** pane note it has been configured to connect to the Prism Element virtual IP of your assigned cluster.
+#. **Citrix Studio > Configuration > Hosting** を選択し、 **NutanixAcropolis** をクリックします。 **Details** ペインに接続設定がされたPrism Elementの仮想IPが表示されます。
 
    .. figure:: images/2.png
 
@@ -53,7 +53,7 @@ XenDesktopサイトには、スケールアウトして大規模化する環境�
    - **Name for these resources** - *Initials*\ -Resources
    - Select **Secondary Network**
 
-   .. figure:: images/4b.png
+   .. figure:: images/4.png
 
 マシンカタログの作成
 ++++++++++++++++++++++++++++
@@ -113,7 +113,7 @@ XenDesktopサイトには、スケールアウトして大規模化する環境�
 
    .. figure:: images/12.png
 
-   自動的に削除される前に、** Prism ** で起動中のPreparation クローンを確認します。このVMには、VMがマシンカタログで使用できるようにするための複数の手順を実行する個別のディスクが接続されています。
+   自動的に削除される前に、 **Prism** で起動中のPreparation クローンを確認します。このVMには、VMがマシンカタログで使用できるようにするための複数の手順を実行する個別のディスクが接続されています。
 
    Preparationの段階では、DHCPを有効にし、Windowsライセンスの「再準備」を実行して、それが一意のVMとしてMicrosoft KMSサーバーに報告されるようにし、同様にOfficeライセンスの「再準備」を実行します。 Citrix Studioは、Preparation が完了してシャットダウンすると、この状態のVMのスナップショットを自動的に作成します。
 
@@ -123,13 +123,13 @@ XenDesktopサイトには、スケールアウトして大規模化する環境�
 
    .. figure:: images/14.png
 
-   ** Prism ** にクローンが存在しており、また電源が入っていないことを確認します。 VMの1つを選択し、** Prism Element ** のVMテーブルの下にある **Virtual Disks** タブで、VMに接続されているOS用 vDiskとIDディスクの両方を確認します。各VMは、ゴールドイメージの独自の読み取り/書き込みコピーを持っているように見えます。複数のNutanixノードにまたがるマシンカタログ内のVMでは、VM読み取りのデータの局所性は本質的にユニファイドキャッシュによって提供されます。
+    **Prism** にクローンが存在しており、また電源が入っていないことを確認します。 VMの1つを選択し、 **Prism Element** のVMテーブルの下にある **Virtual Disks** タブで、VMに接続されているOS用 vDiskとIDディスクの両方を確認します。各VMは、ゴールドイメージの独自の読み取り/書き込みコピーを持っているように見えます。複数のNutanixノードにまたがるマシンカタログ内のVMでは、VM読み取りのデータの局所性は本質的にユニファイドキャッシュによって提供されます。
 
-   .. note:: Nutanixユニファイドキャッシュの動作の詳細については、Nutanix Bibleの「I / Oパスとキャッシュ <http://nutanixbible.com/#anchor-i/o-path-and-cache-65> `_ セクションを参照してください。
+   .. note:: Nutanixユニファイドキャッシュの動作の詳細については、Nutanix Bibleの `I / Oパスとキャッシュ <http://nutanixbible.com/#anchor-i/o-path-and-cache-65> `_ セクションを参照してください。
 
    .. figure:: images/pdesktops8.png
 
-#. 12.	完了したら、 **Citrix Studio** でマシンカタログの詳細を表示します。
+#. 完了したら、 **Citrix Studio** でマシンカタログの詳細を表示します。
 
    .. figure:: images/16.png
 
@@ -156,7 +156,7 @@ XenDesktopサイトには、スケールアウトして大規模化する環境�
 
 #. **Restrict use of this Delivery Group to the following users** を選択し、 **Add** を選択。
 
-#.  **Object names** で **SSP Developers** を指定し **OK** をクリック。
+#. **Object names** で **SSP Developers** を指定し **OK** をクリック。
 
    .. figure:: images/19.png
 
@@ -172,7 +172,7 @@ XenDesktopサイトには、スケールアウトして大規模化する環境�
 
 #. **OK > Next** をクリック。
 
-    デリバリーグループに名前を設定し (例 *Initials* **Win10 Persistent Delivery Group**)  **Finish** をクリック。
+   デリバリーグループに名前を設定し (例 *Initials* **Win10 Persistent Delivery Group**)  **Finish** をクリック。
 
 #. プールの作成後、 **Prism** で、 *Initials*\ **-PD-#** の一つがパワーオン状態であることを確認する。
 

@@ -1,21 +1,21 @@
 .. _citrixfiles:
 
 -------------------------------
-User Personalization with Files
+Nutanix Filesを利用したユーザーカスタマイズ
 -------------------------------
 
-As mentioned in :ref:`citrixnpdesktops`, a key challenge in rolling out non-persistent desktops is ensuring you can still deliver the appropriate level of user customization based on use case. While there are multiple 3rd party solutions that exist in the EUC space, Citrix offers multiple out of the box options, including Citrix User Profile Management (UPM) and Citrix User Personalization Layers (UPL). Both of these solutions require file servers to host profiles and layers.
+ :ref:`citrixnpdesktops` でご紹介したように、非永続デスクトップを展開する際の重要な課題は、ユースケースに基づいて適切なレベルのユーザーカスタマイズを引き続き提供できるようにすることです。 EUCスペースには複数のサードパーティソリューションが存在しますが、Citrixは、Citrix User Profile Management（UPM）やCitrix User Personalization Layers（UPL）など、すぐに使用できるオプションを複数提供しています。これらのソリューションはどちらも、プロファイルとレイヤーをホストするファイルサーバーを必要とします。
 
-In addition to user customization, user's also require external storage for their files - as saving things to a non-redirected Desktop folder on a non-persistent desktop is a recipe for data loss!
+ユーザーのカスタマイズに加えて、ユーザーにはファイル用の外部ストレージも必要です。非永続デスクトップ上のリダイレクトされていないデスクトップフォルダーに保存するとデータが失われるためです。
 
-Nutanix Files introduces a software defined approach of delivering native, distributed file services for EUC environments. No more separate NAS infrastructure to manage, Files can even be deployed on the same infrastructure as your virtual desktops themselves!
+Nutanix Filesは、EUC環境向けにネイティブの分散ファイルサービスを提供するソフトウェア定義のアプローチを導入しています。別のNASインフラストラクチャは必要ありません。Filesは、仮想デスクトップと同じインフラストラクチャに展開することもできます。
 
-**In this lab you will configure Nutanix Files to provide user profiles and data storage for your non-persistent Citrix desktops.**
+ **このラボでは、Nutanix Filesを構成して、非永続的なCitrixデスクトップにユーザープロファイルとデータストレージを提供します。**
 
-Creating Profiles Share
+プロファイル共有の作成
 +++++++++++++++++++++++
 
-For the purposes of saving time and resources, a Nutanix Files instance has already been deployed to your cluster. For a quick overview on how Nutanix Files can be deployed in minutes, click `here <https://www.youtube.com/watch?v=gJagnILsd94>`_.
+この演習では、時間とリソースを節約するために、Nutanix Filesインスタンスは既にクラスターにデプロイされています。 Nutanix Filesをデプロイする簡単なデモは `こちら <https://www.youtube.com/watch?v=gJagnILsd94>`_ で確認できます。
 
 #. In **Prism Element > File Server > Share/Export**, click **+ Share/Export**.
 
