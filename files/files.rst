@@ -17,11 +17,11 @@ Nutanix Filesは、EUC環境向けにネイティブの分散ファイルサー�
 
 この演習では、時間とリソースを節約するために、Nutanix Filesインスタンスは既にクラスターにデプロイされています。 Nutanix Filesをデプロイする簡単なデモは `こちら <https://www.youtube.com/watch?v=gJagnILsd94>`_ で確認できます。
 
-#. In **Prism Element > File Server > Share/Export**, click **+ Share/Export**.
+#. **Prism Element > File Server > Share/Export** と進み、 **+ Share/Export** をクリックする。
 
    .. figure:: images/1.png
 
-#. Under **Basic**, fill out the following fields and click **Next**:
+#. **Basic** で、以下を入力し、 **Next** をクリック:
 
    - **Name** - *Initials*\ **-CitrixProfiles**
    - **Description** - User profiles and data
@@ -30,50 +30,50 @@ Nutanix Filesは、EUC環境向けにネイティブの分散ファイルサー�
 
    .. note::
 
-      As this environment leverages a single-node Files deployment, you are not given the option between **Standard** and **Distributed** share types. <Info on profiles and distributed share - optimizes the sharding of data for this use case by distributing users' home directories evenly across all VMs in the AFS cluster.>
+      この環境に用意されたファイルサーバはシングル構成のため、3台構成の際に提供される標準共有タイプと分散共有タイプのオプションは提供されません。 <プロファイルおよび分散共有に関する情報 : Filesクラスター内のすべてのFSVMにユーザーのホームディレクトリを均等に分散することにより、このユースケースのデータの共有を最適化します。>
 
-#. Fill out the following fields and click **Next > Create**:
+#. 以下を入力し **Next > Create** をクリックする。:
 
-   - Select **Enable Access Based Enumeration (ABE)**
-   - Select **Self Service Restore**
-   - Select **Blocked File Types** - .mp3,.mp4
+   - **Enable Access Based Enumeration (ABE)** を選択
+   - **Self Service Restore** を選択
+   - **Blocked File Types** - .mp3、.mp4
 
    .. figure:: images/13.png
 
    .. note::
 
-     Access Based Enumeration (ABE) is a Microsoft Windows (SMB protocol) feature which allows the users to view only the files and folders to which they have read access when browsing content on the file server.
+     Access Based Enumeration（ABE）はMicrosoft Windows（SMBプロトコル）機能であり、ユーザーはファイルサーバー上のコンテンツを閲覧するときに、読み取りアクセス権を持つファイルとフォルダーのみを表示できます。
 
-     Self Service Restore enabled support for Windows Previous Versions on an SMB share.
+     Self Service Restoreは、SMB共有での「以前のバージョン」機能を有効にしました。
 
-     Either of these features can be enabled/disabled on a per share basis.
+     これらの機能はいずれも、先の手順で作成した共有ごとに有効化/無効化できます。
 
-.. #. Repeat **Steps 1-3** to create an additional Share named *Initials*\ **-DepartmentShare**, without any Blocked File Types.
+#. 上記の **Steps 1-3** を再度実施し、 *Initials*\ **-DepartmentShare** という共有名で作成する。 ※ただし、 **Blocked File Types** は空白で作成する。
 
    .. figure:: images/14.png
 
-#. In **Prism Element > File Server > File Server**, select **BootcampFS** and click **Protect**.
+#. **Prism Element > File Server > File Server** と進み、 **BootcampFS** を選択し、**Protect** をクリック。
 
    .. figure:: images/2.png
 
-     Observe the default Self Service Restore schedules, this feature controls the snapshot schedule for Windows' Previous Versions functionality. Supporting Windows Previous Versions allows end users to roll back changes to files without engaging storage or backup administrators. Note these local snapshots do not protect the file server cluster from local failures and that replication of the entire file server cluster can be performed to remote Nutanix clusters.
+     デフォルトのSelf Service Restore スケジュールを確認してください。この機能は、Windowsの「以前のバージョン」機能のスナップショットスケジュールを設定します。Windowsの「以前のバージョン」機能をサポートすることにより、エンドユーザーは、ストレージ管理者またはバックアップ管理者に依頼することなく、自身でファイルの変更をロールバックできます。また、これらのローカルスナップショットは、ローカル障害からファイルサーバークラスターを保護するだけではなく、ファイルサーバークラスター全体のレプリケーションをリモートNutanixクラスターに対して実行することもできます。
 
-#. From your *Initials*\ **-WinTools** VM, validate you can access ``\\BootcampFS.ntnxlab.local\Initials-CitrixProfiles\`` from File Explorer.
+#. *Initials*\ **-WinTools** VM内のエクスプローラーから ``\\BootcampFS.ntnxlab.local\Initials-CitrixProfiles\`` にアクセスできることを確認する。
 
    .. figure:: images/3.png
 
    .. note::
 
-     To learn more about Files capabilities, including Quotas, Antivirus integration, monitoring, and more, see the `Nutanix Files Guide <https://portal.nutanix.com/#/page/docs/details?targetId=Files-v3_6:Files-v3_6>`_ on the Nutanix Portal.
+     クォータ、アンチウイルス統合、監視などを含むファイル機能の詳細については、Nutanixポータルの `Nutanix Files Guide <https://portal.nutanix.com/#/page/docs/details?targetId=Files-v3_6:Files-v3_6>`_ を参照してください。
 
-Configuring Share Permissions
+共有許可の設定
 +++++++++++++++++++++++++++++
 
-Managing access control for Files SMB shares is still performed natively through Windows. In this exercise you'll configure permissions on your share to allow for any user to create a top level directory, which they then own, within the share. As users log in to their virtual desktops, a folder created based on their AD username will be automatically created.
+ファイルSMB共有のアクセス制御の管理は、Windowsを通じてネイティブに実行されます。この演習では、共有のアクセス許可を構成して、すべてのユーザーが共有内に所有するトップレベルのディレクトリを作成できるようにします。ユーザーが仮想デスクトップにログインすると、ADユーザー名に基づいて作成されたフォルダーが自動的に作成されます。
 
-#. From your *Initials*\ **-WinTools** VM, open ``\\BootcampFS.ntnxlab.local\`` in File Explorer.
+#. *Initials*\ **-WinTools** VMにてエクスプローラーを開き ``\\BootcampFS.ntnxlab.local\`` にアクセスする。
 
-#. Right-click your share and select **Properties**.
+#. 作成した共有フォルダを右クリックし、 **Properties** を開く。
 
    .. figure:: images/4.png
 
