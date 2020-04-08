@@ -36,10 +36,10 @@ Prism Opsは、X-FIT機械学習を使用して、管理対象クラスター内
 
 Prism Opsは、機械学習を使用してデータを分析し、非効率であると学習されたVMに分類を適用します。以下は分類の簡単な説明です。:
 
-  * **Overprovisioned（オーバープロビジョニング）:** 割り当てられたリソースの最小量を使用していると特定されたVM。（余剰リソースが多い）
-  * **Inactive:** 一定期間電源がオフになっているVM、またはCPU、メモリ、またはI / Oリソースを消費しないVMを実行しているVM。
-  * **Constrained（制約あり）:** 追加のリソースでパフォーマンスが向上するVM。（リソース不足）
-  * **Bully:** 多くのリソースを使用し、その結果他のVMに影響を与えると特定されたVM。
+* **Overprovisioned（オーバープロビジョニング）:** 割り当てられたリソースの最小量を使用していると特定されたVM。（余剰リソースが多い）
+* **Inactive:** 一定期間電源がオフになっているVM、またはCPU、メモリ、またはI / Oリソースを消費しないVMを実行しているVM。
+* **Constrained（制約あり）:** 追加のリソースでパフォーマンスが向上するVM。（リソース不足）
+* **Bully:** 多くのリソースを使用し、その結果他のVMに影響を与えると特定されたVM。
 
 
 #. **Prism Central** にてダッシュボードに移動する。 :fa:`bars` **> Dashboard**
@@ -52,7 +52,7 @@ Prism Opsは、機械学習を使用してデータを分析し、非効率で�
 
    .. figure:: images/ppro_59.png
 
-#. 4管理者は、効率リストでVMのリストを確認すると、アクションを実行する対象を決定できる。※リソースが多すぎる、または少なすぎるVMでは、個々のVMのサイズを変更する必要があります。これは、以下にリストするいくつかの例を使用して、さまざまな方法で実行できます。:
+#. 管理者は、効率リストでVMのリストを確認すると、アクションを実行する対象を決定できる。※リソースが多すぎる、または少なすぎるVMでは、個々のVMのサイズを変更する必要があります。これは、以下にリストするいくつかの例を使用して、さまざまな方法で実行できます。:
 
    * **Manually:** 管理者は、ESXi VMのPrismまたはvCenterを介してVM構成を編集し、割り当てられたリソースを変更する。
    * **X-Play:** X-Plays自動プレイブックを使用して、トリガーまたは管理者の指示によりVMのサイズを自動的に変更する。この演習の後半で、実習する項目があります。
@@ -152,7 +152,7 @@ X-Playを利用したメモリの自動追加
 
    .. figure:: images/rs15.png
 
-#. トリガーとして **Manual** を選択し、 Note: このラボ用に構築したチケットシステムは、手動トリガーによって提供されるトリガーAPIを呼び出しますが、このAPIは現バージョンでは公開されていません。Version 5.17では、これと同じ動作を実現するパブリックAPIを公開する「Webhookトリガー」を導入しています。Service Nowなどのツールは、このWebhookを使用してPrism Centralにコールバックし、プレイブックをトリガーできます。T
+#. トリガーとして **Manual** を選択し、 Note: このラボ用に構築したチケットシステムは、手動トリガーによって提供されるトリガーAPIを呼び出しますが、このAPIは現バージョンでは公開されていません。Version 5.17では、これと同じ動作を実現するパブリックAPIを公開する「Webhookトリガー」を導入しています。Service Nowなどのツールは、このWebhookを使用してPrism Centralにコールバックし、プレイブックをトリガーできます。
 
    .. figure:: images/rs16.png
 
@@ -172,7 +172,7 @@ X-Playを利用したメモリの自動追加
 
    - **Recipient:** - メールアドレスを入力
    - **Subject :** - ``Playbook {{playbook.playbook_name}} was executed.``
-   - **Message:**``{{playbook.playbook_name}} has run and has added 1GiB of Memory to the VM {{trigger[0].source_entity_info.name}}.``
+   - **Message:** ``{{playbook.playbook_name}} has run and has added 1GiB of Memory to the VM {{trigger[0].source_entity_info.name}}.``
 
    .. note::
 
