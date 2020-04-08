@@ -267,7 +267,7 @@ Citrix Virtual Apps and Desktops（VAD）のCitrix UPL機能は、セッショ�
 
 #. 仮想デスクトップから切断する。
 
-Takeaways
+お持ち帰り
 +++++++++
 
 - •	Nutanix Filesは、ユーザープロファイル、データ、およびCitrix User Personalization Layer VHDファイルの保存に適したネイティブファイルサービスを提供します。
