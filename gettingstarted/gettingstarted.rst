@@ -18,7 +18,7 @@ Windows Tools VMのデプロイ
 
 #. Prism Centralで :fa:`bars` > **仮想インフラ（Virtual Infrastructure）** > **仮想マシン（VMs）** を選択。
 
-#. **仮想マシンを作成（Create VM）**をクリック
+#. **仮想マシンを作成（Create VM）** をクリック
 
 #. 以下を入力する:
 
@@ -42,4 +42,4 @@ Windows Tools VMのデプロイ
 
 #. 作成したVMのチェックボックスをクリックし **Actions（アクション） > Power On（パワーオン）** .
 
-　　起動すると、自動的にSysprepの処理が走り、**NTNXLAB.local ** ドメインに参加し、**NTNXLAB\\Administrator** としてログインします。
+　　起動すると、自動的にSysprepの処理が走り、 **NTNXLAB.local** ドメインに参加し、**NTNXLAB\\Administrator** としてログインします。
