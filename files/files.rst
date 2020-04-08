@@ -223,7 +223,7 @@ Citrix Virtual Apps and Desktops（VAD）のCitrix UPL機能は、セッショ�
 
 #. **Create Policy** をクリックする。
 
-#.  **Search** 欄で、 **User Layer** を指定する。
+#. **Search** 欄で、 **User Layer** を指定する。
 
    .. figure:: images/16.png
 
@@ -270,13 +270,13 @@ Citrix Virtual Apps and Desktops（VAD）のCitrix UPL機能は、セッショ�
 お持ち帰り
 +++++++++
 
-- •	Nutanix Filesは、ユーザープロファイル、データ、およびCitrix User Personalization Layer VHDファイルの保存に適したネイティブファイルサービスを提供します。
+- Nutanix Filesは、ユーザープロファイル、データ、およびCitrix User Personalization Layer VHDファイルの保存に適したネイティブファイルサービスを提供します。
 
-- •	Citrix User Personalization Layerは、非永続的なプロビジョニングおよびMachine Creation Servicesイメージ用のApp Layering User Layerの簡易バージョンです。
+- Citrix User Personalization Layerは、非永続的なプロビジョニングおよびMachine Creation Servicesイメージ用のApp Layering User Layerの簡易バージョンです。
 
 - Nutanix Filesは、Citrix仮想デスクトップと同じNutanixクラスターに展開できるため、ストレージ容量の利用率が向上し、追加のストレージサイロがなくなります。
 
-- •	混合ワークロード（仮想デスクトップやファイルサービスなど）のサポートは、次のような単一クラスター内で異なるノード構成を混合するNutanixの機能によってさらに強化されます。:
+- 混合ワークロード（仮想デスクトップやファイルサービスなど）のサポートは、次のような単一クラスター内で異なるノード構成を混合するNutanixの機能によってさらに強化されます。:
 
   - ストレージヘビーなノードと、コンピュートヘビーなノードの混在
   - 追加の仮想化ライセンスコストを発生させることなく、ストレージ専用ノードを追加することでストレージ容量を増やす
