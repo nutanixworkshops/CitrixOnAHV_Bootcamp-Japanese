@@ -89,7 +89,7 @@ Virtual Delivery Agent（VDA）は、ユーザー各物理マシンまたは仮�
    - **Operation（オペレーション）** - Clone from Image Service（イメージサービスからクローン）
    - **Image（イメージ）** - Citrix_Virtual_Apps_and_Desktops_7_1912.iso
 
-#. ** Update > Save** をクリック。
+#. **Update > Save** をクリック。
 
 #. ゴールドイメージVMのコンソールにて **D:\\AutoSelect.exe** を開きCitrix installerを起動。
 
