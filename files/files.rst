@@ -1,27 +1,27 @@
 .. _citrixfiles:
 
 -------------------------------
-User Personalization with Files
+Nutanix Filesを利用したユーザーカスタマイズ
 -------------------------------
 
-As mentioned in :ref:`citrixnpdesktops`, a key challenge in rolling out non-persistent desktops is ensuring you can still deliver the appropriate level of user customization based on use case. While there are multiple 3rd party solutions that exist in the EUC space, Citrix offers multiple out of the box options, including Citrix User Profile Management (UPM) and Citrix User Personalization Layers (UPL). Both of these solutions require file servers to host profiles and layers.
+:ref:`citrixnpdesktops` でご紹介したように、非永続デスクトップを展開する際の重要な課題は、ユースケースに基づいて適切なレベルのユーザーカスタマイズを引き続き提供できるようにすることです。 EUCスペースには複数のサードパーティソリューションが存在しますが、Citrixは、Citrix User Profile Management（UPM）やCitrix User Personalization Layers（UPL）など、すぐに使用できるオプションを複数提供しています。これらのソリューションはどちらも、プロファイルとレイヤーをホストするファイルサーバーを必要とします。
 
-In addition to user customization, user's also require external storage for their files - as saving things to a non-redirected Desktop folder on a non-persistent desktop is a recipe for data loss!
+ユーザーのカスタマイズに加えて、ユーザーにはファイル用の外部ストレージも必要です。非永続デスクトップ上のリダイレクトされていないデスクトップフォルダーに保存するとデータが失われるためです。
 
-Nutanix Files introduces a software defined approach of delivering native, distributed file services for EUC environments. No more separate NAS infrastructure to manage, Files can even be deployed on the same infrastructure as your virtual desktops themselves!
+Nutanix Filesは、EUC環境向けにネイティブの分散ファイルサービスを提供するソフトウェア定義のアプローチを導入しています。別のNASインフラストラクチャは必要ありません。Filesは、仮想デスクトップと同じインフラストラクチャに展開することもできます。
 
-**In this lab you will configure Nutanix Files to provide user profiles and data storage for your non-persistent Citrix desktops.**
+**このラボでは、Nutanix Filesを構成して、非永続的なCitrixデスクトップにユーザープロファイルとデータストレージを提供します。**
 
-Creating Profiles Share
+プロファイル共有の作成
 +++++++++++++++++++++++
 
-For the purposes of saving time and resources, a Nutanix Files instance has already been deployed to your cluster. For a quick overview on how Nutanix Files can be deployed in minutes, click `here <https://www.youtube.com/watch?v=gJagnILsd94>`_.
+この演習では、時間とリソースを節約するために、Nutanix Filesインスタンスは既にクラスターにデプロイされています。 Nutanix Filesをデプロイする簡単なデモは `こちら <https://www.youtube.com/watch?v=gJagnILsd94>`_ で確認できます。
 
-#. In **Prism Element > File Server > Share/Export**, click **+ Share/Export**.
+#. **Prism Element > File Server > Share/Export** と進み、 **+ Share/Export** をクリックする。
 
    .. figure:: images/1.png
 
-#. Under **Basic**, fill out the following fields and click **Next**:
+#. **Basic** で、以下を入力し、 **Next** をクリック:
 
    - **Name** - *Initials*\ **-CitrixProfiles**
    - **Description** - User profiles and data
@@ -30,256 +30,256 @@ For the purposes of saving time and resources, a Nutanix Files instance has alre
 
    .. note::
 
-      As this environment leverages a single-node Files deployment, you are not given the option between **Standard** and **Distributed** share types. <Info on profiles and distributed share - optimizes the sharding of data for this use case by distributing users' home directories evenly across all VMs in the AFS cluster.>
+      この環境に用意されたファイルサーバはシングル構成のため、3台構成の際に提供される標準共有タイプと分散共有タイプのオプションは提供されません。 <プロファイルおよび分散共有に関する情報 : Filesクラスター内のすべてのFSVMにユーザーのホームディレクトリを均等に分散することにより、このユースケースのデータの共有を最適化します。>
 
-#. Fill out the following fields and click **Next > Create**:
+#. 以下を入力し **Next > Create** をクリックする。:
 
-   - Select **Enable Access Based Enumeration (ABE)**
-   - Select **Self Service Restore**
-   - Select **Blocked File Types** - .mp3,.mp4
+   - **Enable Access Based Enumeration (ABE)** を選択
+   - **Self Service Restore** を選択
+   - **Blocked File Types** - .mp3、.mp4
 
    .. figure:: images/13.png
 
    .. note::
 
-     Access Based Enumeration (ABE) is a Microsoft Windows (SMB protocol) feature which allows the users to view only the files and folders to which they have read access when browsing content on the file server.
+     Access Based Enumeration（ABE）はMicrosoft Windows（SMBプロトコル）機能であり、ユーザーはファイルサーバー上のコンテンツを閲覧するときに、読み取りアクセス権を持つファイルとフォルダーのみを表示できます。
 
-     Self Service Restore enabled support for Windows Previous Versions on an SMB share.
+     Self Service Restoreは、SMB共有での「以前のバージョン」機能を有効にしました。
 
-     Either of these features can be enabled/disabled on a per share basis.
+     これらの機能はいずれも、先の手順で作成した共有ごとに有効化/無効化できます。
 
-.. #. Repeat **Steps 1-3** to create an additional Share named *Initials*\ **-DepartmentShare**, without any Blocked File Types.
+#. 上記の **Steps 1-3** を再度実施し、 *Initials*\ **-DepartmentShare** という共有名で作成する。 ※ただし、 **Blocked File Types** は空白で作成する。
 
    .. figure:: images/14.png
 
-#. In **Prism Element > File Server > File Server**, select **BootcampFS** and click **Protect**.
+#. **Prism Element > File Server > File Server** と進み、 **BootcampFS** を選択し、**Protect** をクリック。
 
    .. figure:: images/2.png
 
-     Observe the default Self Service Restore schedules, this feature controls the snapshot schedule for Windows' Previous Versions functionality. Supporting Windows Previous Versions allows end users to roll back changes to files without engaging storage or backup administrators. Note these local snapshots do not protect the file server cluster from local failures and that replication of the entire file server cluster can be performed to remote Nutanix clusters.
+     デフォルトのSelf Service Restore スケジュールを確認してください。この機能は、Windowsの「以前のバージョン」機能のスナップショットスケジュールを設定します。Windowsの「以前のバージョン」機能をサポートすることにより、エンドユーザーは、ストレージ管理者またはバックアップ管理者に依頼することなく、自身でファイルの変更をロールバックできます。また、これらのローカルスナップショットは、ローカル障害からファイルサーバークラスターを保護するだけではなく、ファイルサーバークラスター全体のレプリケーションをリモートNutanixクラスターに対して実行することもできます。
 
-#. From your *Initials*\ **-WinTools** VM, validate you can access ``\\BootcampFS.ntnxlab.local\Initials-CitrixProfiles\`` from File Explorer.
+#. *Initials*\ **-WinTools** VM内のエクスプローラーから ``\\BootcampFS.ntnxlab.local\Initials-CitrixProfiles\`` にアクセスできることを確認する。
 
    .. figure:: images/3.png
 
    .. note::
 
-     To learn more about Files capabilities, including Quotas, Antivirus integration, monitoring, and more, see the `Nutanix Files Guide <https://portal.nutanix.com/#/page/docs/details?targetId=Files-v3_6:Files-v3_6>`_ on the Nutanix Portal.
+     クォータ、アンチウイルス統合、監視などを含むファイル機能の詳細については、Nutanixポータルの `Nutanix Files Guide <https://portal.nutanix.com/#/page/docs/details?targetId=Files-v3_6:Files-v3_6>`_ を参照してください。
 
-Configuring Share Permissions
+共有許可の設定
 +++++++++++++++++++++++++++++
 
-Managing access control for Files SMB shares is still performed natively through Windows. In this exercise you'll configure permissions on your share to allow for any user to create a top level directory, which they then own, within the share. As users log in to their virtual desktops, a folder created based on their AD username will be automatically created.
+ファイルSMB共有のアクセス制御の管理は、Windowsを通じてネイティブに実行されます。この演習では、共有のアクセス許可を構成して、すべてのユーザーが共有内に所有するトップレベルのディレクトリを作成できるようにします。ユーザーが仮想デスクトップにログインすると、ADユーザー名に基づいて作成されたフォルダーが自動的に作成されます。
 
-#. From your *Initials*\ **-WinTools** VM, open ``\\BootcampFS.ntnxlab.local\`` in File Explorer.
+#. *Initials*\ **-WinTools** VMにてエクスプローラーを開き ``\\BootcampFS.ntnxlab.local\`` にアクセスする。
 
-#. Right-click your share and select **Properties**.
+#. 作成した共有フォルダを右クリックし、 **Properties** を開く。
 
    .. figure:: images/4.png
 
-#. Select the **Security** tab and click **Advanced**.
+#. **Security** タブを開き、 **Advanced** をクリックする。
 
-#. Select the default **Users (BootcampFS\\Users)** entry and click **Remove**.
+#. デフォルトの **Users (BootcampFS\\Users)** をエントリーを選択し **Remove** をクリックする。
 
-#. Click **Add**.
+#. **Add** をクリック。
 
-#. Click **Select a principal** and specify **Everyone** in the **Object Name** field. Click **OK**.
+#. **Select a principal** をクリックし、 **Object Name** で **Everyone** を指定して **OK** をクリックする。
 
-#. Fill out the following fields and click **OK**:
+#. 以下を入力し **OK** をクリックする。:
 
    - **Type** - Allow
    - **Applies to** - This folder only
-   - Select **Read & execute**
-   - Select **List folder contents**
-   - Select **Read**
-   - Select **Write**
+   - **Read & execute** を選択する。
+   - **List folder contents** を選択する。
+   - **Read** を選択する。
+   - **Write** を選択する。
 
    .. figure:: images/5.png
 
-#. Click **OK > OK > OK**.
+#. **OK > OK > OK** と進む。
 
    .. figure:: images/6.png
 
-Configuring Citrix User Profile Management
+Citrixユーザープロファイル管理(UPM)の構成
 ++++++++++++++++++++++++++++++++++++++++++
 
-UPM runs as a system service installed as part of the Virtual Delivery Agent within the virtual desktop or XenApp server. While similar to Microsoft Roaming Profiles, it offers key advantages such as faster logons by streaming the profile on-demand, administrative controls to limit profile size, and detailed logging.
+UPM（User Profile Management）は、仮想デスクトップまたはXenAppサーバー内のVirtual Delivery Agentの一部としてインストールされたシステムサービスとして実行されます。Microsoft Roaming Profilesに似ていますが、プロファイルをオンデマンドでストリーミングすることによるログオンの高速化、プロファイルサイズを制限するための管理コントロール、詳細なログなどの重要な利点があります。
 
-In this exercise you will enable UPM through the Citrix Policy engine, similar to Microsoft Group Policy.
+この演習では、Microsoftグループポリシーと同様に、Citrixポリシーエンジンを介してUPMを有効にします。
 
-#. In **Citrix Studio > Policies**, right-click **Policies > Create Policy**.
+#. **Citrix Studio > Policies** と進み、 **Policiesを右クリック > Create Policy** をクリックする。
 
    .. figure:: images/7.png
 
-#. Select **Profile Management > Basic Settings** from the **All Settings** drop down menu. Optionally you can filter for only policies supported on **1912 Single-Session OS** from the **All Versions** drop down menu.
+#. **All Settings** のドロップダウンから、 **Profile Management > Basic Settings** と進む。（オプション： **All Versions** のドロップダウンから **1912 Single-Session OS** でサポートされるポリシーのみをフィルターすることができます。）
 
    .. figure:: images/8.png
 
-#. Search for **Enable Profile management** and click **Select**. Select **Enabled** and click **OK**.
+#. **Enable Profile management** を検索し、 **Select** を選択。 **Enabled** を選択し、 **OK** をクリックする。
 
    .. figure:: images/9.png
 
-#. Search for **Path to user store** and click **Select**. Select **Enabled** and specify ``\\BootcampFS\Initials-CitrixProfiles\%USERNAME%\!CTX_OSNAME!!CTX_OSBITNESS!`` as the path. Click **OK**.
+#. **Path to user store** を検索し、 **Select** をクリック。 **Enabled** を選択し、パスに ``\\BootcampFS\Initials-CitrixProfiles\%USERNAME%\!CTX_OSNAME!!CTX_OSBITNESS!`` を指定する。 **OK** をクリックする。
 
    .. figure:: images/10.png
 
    .. note::
 
-     The specified path will not only create unique top level directories within the share for each user, but will also create a platform specific subdirectory for their profile to avoid incompatability issues, such as trying to apply a Windows 10 user profile to a Windows 2012 session.
+     指定されたパスは、各ユーザーの共有内に一意の最上位ディレクトリを作成するだけでなく、例えばWindows 10ユーザープロファイルをWindows 2012セッションに適用しようとするなどの非互換操作を回避するために、プロファイル用のプラットフォーム固有のサブディレクトリも作成します。
 
-#. Click **Next**.
+#. **Next** をクリックする。
 
-#. Click **Assign** to the right of **Delivery Group**.
+#. **Delivery Group** の右側にある **Assign** をクリックする。
 
-#. Select your Non-Persistent Delivery Group from the **Delivery Group** drop down menu. Click **OK**.
+#. **Delivery Group** のドロップダウンメニューから、非永続デリバリーグループを選択し、 **OK** をクリックする。
 
    .. figure:: images/11.png
 
    .. note::
 
-     Studio offers many different means of applying policies. Across a more diverse environment it may make sense to configure UPM settings based on OUs or Tags.
+     Studioには、ポリシーを適用するさまざまな方法が用意されています。より多様な環境では、OUまたはタグに基づいてUPM設定を構成することが理にかなっています。
 
-#. Click **Next**.
+#. **Next** をクリックする。
 
-#. Provide a friendly **Policy name** (e.g. *Initials*\ **-UPM**) and select **Enable policy**. Review your configuration and click **Finish**.
+#. **Policy name** を設定し(例 *Initials*\ **-UPM**)  **Enable policy** を選択する。 設定内容を確認し、 **Finish** をクリックする。
 
    .. figure:: images/12.png
 
-Testing Profiles and Folder Redirection
+プロファイルとフォルダーリダイレクトのテスト
 +++++++++++++++++++++++++++++++++++++++
 
-#. From your *Initials*\ **ToolsVM**, open http://ddc.ntnxlab.local/Citrix/NTNXLABWeb, login as **NTNXLAB\\operator02** and connect to a **Pooled Windows 10 Desktop**.
+#. *Initials*\ **ToolsVM** にてブラウザを起動し、 http://ddc.ntnxlab.local/Citrix/NTNXLABWeb にアクセスし **NTNXLAB\\operator02** でログインして **Pooled Windows 10 Desktop** に接続する。
 
-#. Within your virtual desktop, make some simple changes such as adding files to your Documents folder. Note the hostname of the desktop to which you are connected.
+#. 仮想デスクトップにて、ファイルやフォルダーを作成するなどの小さな変更を加える。※接続しているデスクトップのホスト名を控えておく。
 
    .. figure:: images/afsprofiles15.png
 
-#. Open **PowerShell** and try to create a file with a blocked file type by executing the following command:
+#. **PowerShell** を起動し、以下のコマンドを実行しブロックタイプのファイルを作成する。:
 
    .. code-block:: PowerShell
 
       New-Item \\BootcampFS\INITIALS-CitrixProfiles\operator02\Win10RS6x64\UPM_Profile\Documents\test.mp3
 
-   Observe that creation of the new file is denied.
+   新しいファイル作成が拒否されることを確認する。
 
-#. Sign out of the **Pooled** desktop. Do not just close the Citrix Workspace session as the desktop will not be re-provisioned.
+#. **Pooled** デスクトップからサインアウトする。 ※Citrix Workspace セッションを閉じないでください。
 
-#. Again, log in to Citrix StoreFront as **NTNXLAB\\operator02** and connect to a **Pooled Windows 10 Desktop**. Note that your files and settings persist across sessions, despite the underlying desktop being freshly provisioned every time you log in.
+#. 再度Citrix StoreFrontへ **NTNXLAB\\operator02** でログインし、**Pooled Windows 10 Desktop** に接続する。 ログインするたびに基盤となるデスクトップが新たにプロビジョニングされるにもかかわらず、ファイルと設定はセッションを超えて保持されることを確認する。
 
-#. Open ``\\BootcampFS\Initials-CitrixProfiles\operator02`` in **File Explorer**. Drill down into the directory structure to find the data associated with your user profile.
+#. エクスプローラーで ``\\BootcampFS\Initials-CitrixProfiles\operator02`` に接続し、ユーザープロファイルに関連づけられたプロファイルを見付ける。
 
-#. Sign out of your virtual desktop. **Do not simply disconnect or close the Citrix Workspace App**.
+#. 仮想デスクトップからサインアウトする。 **Citrix Workspace Appを閉じないでください**
 
-#. Log in to Citrix StoreFront as **NTNXLAB\\operator01** and connect to a **Pooled Windows 10 Desktop**. Open ``\\BootcampFS\Initials-CitrixProfiles\`` and note that you don't see or have access to **operator02**'s profile directory. Disable **Access Based Enumeration (ABE)** in **Prism > File Server > Share/Export > home > Update** and try again.
+#. Citrix StoreFront に **NTNXLAB\\operator01** でログインし、 **Pooled Windows 10 Desktop** へ接続する。エクスプローラーで ``\\BootcampFS\Initials-CitrixProfiles\`` を開き、 **operator02** の profileディレクトリが表示されないか、アクセスできないことを確認する。　※ **Prism > File Server > Share/Export > home > Update** で、 **Access Based Enumeration (ABE)** を無効化して再度確認してみてください。
 
-#. (Optional) Create and save a text file in the **Documents** folder of your non-persistent virtual desktop. After ~1 hour, return to your virtual desktop, modify and save the document you previously created. Right-click the file and select **Restore previous versions**. Select an available previous version of the document and click **Open** to access the file.
+#. (オプション演習) 非永続デスクトップにて **Documents** フォルダにテキストファイルを作成する。約1時間後、仮想デスクトップに戻り、作成したテキストを編集して保存する。対象ファイルを右クリックし、 **Restore previous versions（以前のバージョン）** を選択する。 使用可能な以前のバージョンを選択し、 **Open** をクリックしてファイルにアクセスする。
 
 .. figure:: images/afsprofiles16.png
 
-(Optional) Using Files with Citrix User Personalization Layers
+(オプション演習) Citrix User Personalization Layers（UPL）でのFilesの利用
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-The Citrix UPL feature of Citrix Virtual Apps and Desktops (VAD) extends capabilities of non-persistent Windows 10 desktops by preserving data and locally user installed applications (UIA) across sessions.  Citrix UPL is the same technology as App Layering User Layers but is integrated into the Citrix Virtual Delivery Agent (VDA) and uses the Citrix policy engine.  Citrix UPL has all the features and functionality of User Layers (UL) without having to go through the entire App Layering process or having to deploy the Enterprise Layering Manager (ELM) virtual appliance.
+Citrix Virtual Apps and Desktops（VAD）のCitrix UPL機能は、セッション間でデータとローカルユーザーインストールアプリケーション（UIA）を保持することにより、非永続的なWindows 10デスクトップの機能を拡張します。Citrix UPLは、App Layering User Layerと同じテクノロジーですが、Citrix Virtual Delivery Agent（VDA）に統合され、Citrixポリシーエンジンを使用します。Citrix UPLは、ユーザーレイヤー（UL）のすべての機能を備えており、アプリレイヤー化プロセス全体を実行したり、Enterprise Layering Manager（ELM）仮想アプライアンスを展開したりする必要はありません。
 
 .. note::
 
-   All applications the user installs locally in the virtual desktop are supported in Citrix UPL, except for the following items:
+   ユーザーが仮想デスクトップにローカルにインストールするすべてのアプリケーションは、次の項目を除き、Citrix UPLでサポートされます。:
 
-   - Enterprise applications, such as Microsoft Office and Visual Studio
-   - Applications that modify network stack or hardware, such as a VPN client
-   - Applications that have boot level drivers, such as antivirus programs
-   - Applications that have drivers that use the driver store, such as a printer driver
+   - Microsoft OfficeやVisual Studioなどのエンタープライズアプリケーション
+   - VPNクライアントなど、ネットワークスタックまたはハードウェアを変更するアプリケーション
+   - ウイルス対策プログラムなどのブートレベルのドライバーを備えたアプリケーション
+   - プリンタードライバーなど、ドライバーストアを使用するドライバーを持つアプリケーション
 
-   Instead of having the user install the applications listed above locally in the virtual desktop as part of their UPL, install these applications in the master image.
+   上記のアプリケーションをユーザーにUPLの一部として仮想デスクトップにローカルにインストールさせる代わりに、これらのアプリケーションをマスターイメージにインストールします。
 
-   Any applications that attempt to add or edit local users or groups will not have the changes persist.  Instead add any required local users or groups to the master image.
+   ローカルユーザーまたはグループを追加または編集しようとするアプリケーションは、変更を保持しません。代わりに、必要なローカルユーザーまたはグループをマスターイメージに追加します。
 
-   For full requirements and recommendations, see `Citrix Product Documentation on Citrix Virtual Apps and Desktops User Personalization Layer <https://docs.citrix.com/en-us/citrix-virtual-apps-desktops/install-configure/user-personalization-layer.html>`_.
+   完全な要件と推奨事項については、 `Citrixの製品ドキュメント Citrix Virtual Apps and Desktops User Personalization Layer <https://docs.citrix.com/en-us/citrix-virtual-apps-desktops/install-configure/user-personalization-layer.html>`_ を確認してください。
 
-#. Return to **Prism Element > File Server > Share/Export**, click **+ Share/Export**.
+#. **Prism Element > File Server > Share/Export** と進み、 **+ Share/Export** をクリック。
 
-#. Under **Basic**, fill out the following fields and click **Next**:
+#. **Basic** 項目にて、以下を入力し **Next** をクリックする。:
 
    - **Name** - *Initials*\ **-CitrixUPL**
    - **Description** - Citrix UPL storage
    - **File Server** - BootcampFS
    - **Select Protocol** - SMB
 
-#. Click **Next > Create**.
+#. **Next > Create** をクリックする。
 
-#. From your *Initials*\ **-WinTools** VM, open ``\\BootcampFS.ntnxlab.local\`` in File Explorer.
+#. *Initials*\ **-WinTools** VMにて、エクスプローラーを開き ``\\BootcampFS.ntnxlab.local\`` にアクセスする。
 
-#. Open your *Initials*\ **-CitrixUPL** share and create a new directory named **Users**.
+#. *Initials*\ **-CitrixUPL** を開き、 **Users** という名前のディレクトリを作成する。
 
    .. figure:: images/15.png
 
    .. note::
 
-      The folder name is hard coded in Citrix UPL and must be named **Users**.
+      フォルダー名はCitrix UPLでハードコーディングされており、 **Users** という名前にする必要があります。
 
-#. Return to **Citrix Studio > Policies**. Right-click your **UPM** policy and select **Disable**.
+#. **Citrix Studio > Policies** に戻り、 **UPM** を右クリックし、 **Disable** をクリックする。
 
-   You will be applying your UPL policy to the same group of desktops.
+   UPLポリシーを同じデスクトップグループに適用します。
 
-#. Click **Create Policy**.
+#. **Create Policy** をクリックする。
 
-#. Specify **User Layer** in the **Search** field to filter for the required settings.
+#. **Search** 欄で、 **User Layer** を指定する。
 
    .. figure:: images/16.png
 
-#. Select **User Layer Repository Path** and specify the path to your *Initials*\ **-CitrixUPL** share. Do not include the **Users** folder in the path, this will be appended automatically. Click **OK**
+#. **User Layer Repository Path** を選択し、 *Initials*\ **-CitrixUPL** を指定し **OK** をクリックする。 ※ **Users** フォルダーをパスに含めないように注意してください。これは自動的に追加されます。
 
    .. figure:: images/17.png
 
-#. Select **User Layer Size in GB** and specify a value of **20** GB. Click **OK**.
+#. **User Layer Size in GB** を選択し、 **20** GBを指定し、 **OK** をクリックする。
 
-   .. note:: The default value of 0 will configure 10GB UPL disks.
+   .. note:: デフォルト値の0では、10GB UPLディスクが構成されます。
 
-#. Click **Next**.
+#. **Next** をクリックする。
 
-#. Click **Assign** to the right of **Delivery Group**.
+#. **Delivery Group** 右側の **Assign** をクリックする。
 
-#. Select your Non-Persistent Delivery Group from the **Delivery Group** drop down menu. Click **OK**.
+#. **Delivery Group** のドロップダウンメニューから、非永続デリバリーグループを選択し、 **OK** をクリックする。
 
    .. figure:: images/11.png
 
    .. note::
 
-      Citrix UPL works with Pooled-Random and Pooled-Static Machine Catalogs. Citrix UPL does not support Pooled-Static Machine Catalogs with Citrix Personal vDisk (now deprecated) or dedicated, persistent machines that save changes to local disk.
+      Citrix UPLは、Pooled-RandomおよびPooled-Static Machine Catalogと連携します。Citrix UPLは、Citrix Personal vDisk（現在廃止予定）またはローカルディスクへの変更を保存する専用の永続的なマシンを備えたPooled-Staticマシンカタログをサポートしていません。
 
-#. Click **Next**.
+#. **Next** をクリックする。
 
-#. Provide a friendly **Policy name** (e.g. *Initials*\ **-UPL**) and select **Enable policy**. Review your configuration and click **Finish**.
+#. **Policy name** を設定し(例 *Initials*\ **-UPL**)  **Enable policy** を選択する。設定を確認し、 **Finish** をクリックする。
 
-#. From your *Initials*\ **ToolsVM**, open http://ddc.ntnxlab.local/Citrix/NTNXLABWeb, login as **NTNXLAB\\operator03** and connect to a **Pooled Windows 10 Desktop**.
+#. *Initials*\ **ToolsVM** にてブラウザを開き、 http://ddc.ntnxlab.local/Citrix/NTNXLABWeb に接続し、 **NTNXLAB\\operator03** でログインし **Pooled Windows 10 Desktop** に接続する。
 
-#. Open ``\\BootcampFS.ntnxlab.local\<Initials>-CitrixUPL\Users`` in File Explorer and note there is now a directory for your user containing a VHD with your personal desktop layer.
+#. エクスプローラーにて ``\\BootcampFS.ntnxlab.local\<Initials>-CitrixUPL\Users`` へ接続する。パーソナルデスクトップレイヤーのVHDを含むユーザーディレクトリがあることを確認する。
 
    .. figure:: images/18.png
 
-#. Download and install **Mozilla Firefox** on your desktop. Launch Firefox and configure as your default browser.
+#. 仮想デスクトップ上で **Mozilla Firefox** をインストールし、デフォルトブラウザとして設定する。
 
-#. Restart your virtual desktop.
+#. 仮想デスクトップを再起動する。
 
-#. After ~2 minutes, return to Citrix StoreFront and launch another **Pooled Windows 10 Desktop**. Observe that Firefox in still installed and configured as your default browser. Launch Firefox and note that the initial setup does not run again, as it has saved the settings from the previous session.
+#. 2分ほど経過した後、Citrix StoreFront にて別の **Pooled Windows 10 Desktop** を起動する。FireFoxがインストールされており、デフォルトブラウザとして設定されていることを確認する。同様に、FireFoxを起動し、初期セットアップが不要であることを確認する。
 
    .. figure:: images/19.png
 
-#. Disconnect from your virtual desktop.
+#. 仮想デスクトップから切断する。
 
-Takeaways
+お持ち帰り
 +++++++++
 
-- Nutanix Files provides native files services suitable for storing user profile, data, and Citrix User Personalization Layer VHD files.
+- Nutanix Filesは、ユーザープロファイル、データ、およびCitrix User Personalization Layer VHDファイルの保存に適したネイティブファイルサービスを提供します。
 
-- Citrix User Personalization Layer is a simplified version of App Layering User Layers for non-persistent Provisioning and Machine Creation Services images.
+- Citrix User Personalization Layerは、非永続的なプロビジョニングおよびMachine Creation Servicesイメージ用のApp Layering User Layerの簡易バージョンです。
 
-- Nutanix Files can be deployed on the same Nutanix cluster as your Citrix virtual desktops, resulting in better utilization of storage capacity and eliminating additional storage silos.
+- Nutanix Filesは、Citrix仮想デスクトップと同じNutanixクラスターに展開できるため、ストレージ容量の利用率が向上し、追加のストレージサイロがなくなります。
 
-- Supporting mixed workloads (e.g. virtual desktops and file services) is further enhanced by Nutanix's ability to mix different node configurations within a single cluster, such as:
+- 混合ワークロード（仮想デスクトップやファイルサービスなど）のサポートは、次のような単一クラスター内で異なるノード構成を混合するNutanixの機能によってさらに強化されます。:
 
-  - Mixing storage heavy and compute heavy nodes
-  - Expanding a cluster with Storage Only nodes to increase storage capacity without incurring additional virtualization licensing costs
-  - Mixing different generations of hardware (e.g. NX-3460-G6 + NX-6235-G5)
-  - Mixing all flash nodes with hybrid nodes
-  - Mixing NVIDIA GPU nodes with non-GPU nodes
+  - ストレージヘビーなノードと、コンピュートヘビーなノードの混在
+  - 追加の仮想化ライセンスコストを発生させることなく、ストレージ専用ノードを追加することでストレージ容量を増やす
+  - 異なる世代のハードウェアの混合（例：NX-3460-G6 + NX-6235-G5）
+  - オールフラッシュノードとハイブリッドノードの混在
+  - NVIDIA GPUノードと非GPUノードの混合
