@@ -13,7 +13,7 @@
 マシンカタログの作成
 ++++++++++++++++++++++++++++
 
-#. **Citrix Studio**で、 **Machine Catalogsを右クリック > Create Machine Catalog** を選択する。
+#. **Citrix Studio** で、 **Machine Catalogsを右クリック > Create Machine Catalog** を選択する。
 
 #. **Next** をクリック。
 
