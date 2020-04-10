@@ -117,7 +117,6 @@
 
    .. note::
 
-      For more granular control of registered, powered on VMs you can click the Edit link and provide the number or percentage of VMs you want available for every hour of the day. You can also configure the disconnected VM policy to free up disconnected VMs after a configurable time out period, returning the desktop to the pool for another user.
       パワーオン状態の登録済みVMをより細かく制御するには、Editをクリックして、1時間ごとに使用可能なVMの数または割合を指定します。また、タイムアウト期間後に切断されたVMを解放し、デスクトップを別のユーザーのプールに戻すように、切断されたVMポリシーを構成できます。
 
 #. パワーオン状態のVMを増やした後、 **W10NP-##** VMs が **Prism** でパワーオン状態になり **Citrix Studio** に登録されたことを確認する。
