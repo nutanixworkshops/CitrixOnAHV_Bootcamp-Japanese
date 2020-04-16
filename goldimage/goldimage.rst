@@ -200,7 +200,7 @@ Citrix XenDesktopは、ゴールドイメージのスナップショットを利
 
 #. ゴールドイメージVMの再起動完了後、仮想マシン内からシャットダウンを実行。
 
-#. **Prism Element**, からゴールドイメージVMのスナップショットを取得する。 (名前は *Initials Post optimization and VDA install*)
+#. **Prism Element** からゴールドイメージVMのスナップショットを取得する。 (名前は *Initials Post optimization and VDA install*)
 
    .. figure:: images/20.png
 
