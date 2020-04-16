@@ -125,7 +125,7 @@ XenDesktopサイトには、スケールアウトして大規模化する環境�
 
     **Prism** にクローンが存在しており、また電源が入っていないことを確認します。 VMの1つを選択し、 **Prism Element** のVMテーブルの下にある **Virtual Disks** タブで、VMに接続されているOS用 vDiskとIDディスクの両方を確認します。各VMは、ゴールドイメージの独自の読み取り/書き込みコピーを持っているように見えます。複数のNutanixノードにまたがるマシンカタログ内のVMでは、VM読み取り時のデータローカリティは本質的にユニファイドキャッシュによって提供されます。
 
-   .. note:: Nutanixユニファイドキャッシュの動作の詳細については、Nutanix Bibleの ` I/Oパスとキャッシュ <http://nutanixbible.com/#anchor-i/o-path-and-cache-65> `_ セクションを参照してください。
+   .. note:: Nutanixユニファイドキャッシュの動作の詳細については、Nutanix Bibleの `I/Oパスとキャッシュ <http://nutanixbible.com/#anchor-i/o-path-and-cache-65>`_ セクションを参照してください。
 
    .. figure:: images/pdesktops8.png
 
