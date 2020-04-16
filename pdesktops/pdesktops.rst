@@ -51,7 +51,7 @@ XenDesktopサイトには、スケールアウトして大規模化する環境�
 #. 以下を入力し **Next > Finish** をクリックする。:
 
    - **Name for these resources** - *Initials*\ -Resources
-   - Select **Secondary Network**
+   - **Secondary Network** を選択（下記参考イメージではUser1を選択してますが、Secondaryを選択してください。）
 
    .. figure:: images/4.png
 
