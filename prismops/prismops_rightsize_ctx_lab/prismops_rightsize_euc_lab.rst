@@ -17,7 +17,7 @@ Prism Opsを利用した適切なサイジング
 
    .. figure:: images/init1.png
 
-#. ブラウザを起動し、http://`<GTSPrismOpsLabUtilityServer_IP_ADDRESS>`/alerts に接続する。[例 http://10.42.113.52/alerts] 下図のようなログイン画面が表示された場合は **Prism Central IP** と、Prismログインのための **Username**  **Password** を入力し **Login** をクリックする。
+#. ブラウザを起動し、 http://`<GTSPrismOpsLabUtilityServer_IP_ADDRESS>`/alerts に接続する。[例 http://10.42.113.52/alerts] 下図のようなログイン画面が表示された場合は **Prism Central IP** と、Prismログインのための **Username**  **Password** を入力し **Login** をクリックする。
 
    .. figure:: images/init2.png
 
