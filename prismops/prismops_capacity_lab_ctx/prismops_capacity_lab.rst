@@ -70,7 +70,7 @@ Prism OpsのX-FITエンジンは、将来のワークロードを計画する機
 
 #. 同様の操作を実施し、適当なワークロードを追加する。
 
-#.  **Recommend** ボタンをクリックする。
+#. **Recommend** ボタンをクリックする。
 
    .. figure:: images/ppro_18.png
 
