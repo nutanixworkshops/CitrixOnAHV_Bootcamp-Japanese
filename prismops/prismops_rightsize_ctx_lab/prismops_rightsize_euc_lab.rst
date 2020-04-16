@@ -69,7 +69,7 @@ Prism Opsは、機械学習を使用してデータを分析し、非効率で�
 
    .. figure:: images/ppro_60.png
 
-#. **“Alert Setting”** をクリックし、このような状況を検知するためのアラートポリシーを設定する。
+#. **Alert Setting** をクリックし、このような状況を検知するためのアラートポリシーを設定する。
 
 #. Window右側で、必要に応じていくつかの設定を変更できることを確認する。※下図の例では、行動異常のしきい値を変更して、10％から70％の間の異常を無視しています。他のすべての異常は、警告アラートを生成します。また、このVMのCPU使用率が95％を超える場合、静的しきい値をアラートクリティカルに調整しました。
 
@@ -144,7 +144,7 @@ X-Playを利用したメモリの自動追加
 
    .. figure:: images/rs13.png
 
-#. **Save & Close** を選択し、名前を “*Initials* - Generate Service Ticket for Constrained VM” と設定する。 ** ‘Enabled’ トグルで有効にすることを忘れないでください。**
+#. **Save & Close** を選択し、名前を “*Initials* - Generate Service Ticket for Constrained VM” と設定する。 **‘Enabled’ トグルで有効にすることを忘れないでください。** 
 
    .. figure:: images/rs14.png
 
