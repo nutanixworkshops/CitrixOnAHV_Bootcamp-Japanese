@@ -17,25 +17,25 @@ Nutanix Filesは、EUC環境向けにネイティブの分散ファイルサー�
 
 この演習では、時間とリソースを節約するために、Nutanix Filesインスタンスは既にクラスターにデプロイされています。 Nutanix Filesをデプロイする簡単なデモは `こちら <https://www.youtube.com/watch?v=gJagnILsd94>`_ で確認できます。
 
-#. **Prism Element > File Server > Share/Export** と進み、 **+ Share/Export** をクリックする。
+#. **Prism Element > ファイルサーバー（File Server） > Share/Export** と進み、 **+ Share/Export** をクリックする。
 
    .. figure:: images/1.png
 
-#. **Basic** で、以下を入力し、 **Next** をクリック:
+#. **ベーシック（Basic）** で、以下を入力し、 **Next** をクリック:
 
-   - **Name** - *Initials*\ **-CitrixProfiles**
-   - **Description** - User profiles and data
-   - **File Server** - BootcampFS
-   - **Select Protocol** - SMB
+   - **名前（Name）** - *Initials*\ **-CitrixProfiles**
+   - **詳細（Description）** - User profiles and data
+   - **ファイルサーバー（File Server）** - BootcampFS
+   - **選択プロトコル（Select Protocol）** - SMB
 
    .. note::
 
       この環境に用意されたファイルサーバはシングル構成のため、3台構成の際に提供される標準共有タイプと分散共有タイプのオプションは提供されません。 <プロファイルおよび分散共有に関する情報 : Filesクラスター内のすべてのFSVMにユーザーのホームディレクトリを均等に分散することにより、このユースケースのデータの共有を最適化します。>
 
-#. 以下を入力し **Next > Create** をクリックする。:
+#. 以下を入力し **Next > 作成（Create）** をクリックする。:
 
-   - **Enable Access Based Enumeration (ABE)** を選択
-   - **Self Service Restore** を選択
+   - **アクセスベース列挙法（ABE）を有効化（Enable Access Based Enumeration (ABE)）** を選択
+   - **セルフサービスリストアを有効にする（Self Service Restore）** を選択
    - **Blocked File Types** - .mp3、.mp4
 
    .. figure:: images/13.png
@@ -52,7 +52,7 @@ Nutanix Filesは、EUC環境向けにネイティブの分散ファイルサー�
 
    .. figure:: images/14.png
 
-#. **Prism Element > File Server > File Server** と進み、 **BootcampFS** を選択し、**Protect** をクリック。
+#. **Prism Element > ファイルサーバー（File Server） > File Server** と進み、 **BootcampFS** を選択し、**Protect** をクリック。
 
    .. figure:: images/2.png
 
@@ -196,16 +196,16 @@ Citrix Virtual Apps and Desktops（VAD）のCitrix UPL機能は、セッショ�
 
    完全な要件と推奨事項については、 `Citrixの製品ドキュメント Citrix Virtual Apps and Desktops User Personalization Layer <https://docs.citrix.com/en-us/citrix-virtual-apps-desktops/install-configure/user-personalization-layer.html>`_ を確認してください。
 
-#. **Prism Element > File Server > Share/Export** と進み、 **+ Share/Export** をクリック。
+#. **Prism Element > ファイルサーバー（File Server） > Share/Export** と進み、 **+ Share/Export** をクリック。
 
-#. **Basic** 項目にて、以下を入力し **Next** をクリックする。:
+#. **ベーシック（Basic）** 項目にて、以下を入力し **Next** をクリックする。:
 
-   - **Name** - *Initials*\ **-CitrixUPL**
-   - **Description** - Citrix UPL storage
-   - **File Server** - BootcampFS
-   - **Select Protocol** - SMB
+   - **名前（Name）** - *Initials*\ **-CitrixUPL**
+   - **詳細（Description）** - Citrix UPL storage
+   - **ファイルサーバー（File Server）** - BootcampFS
+   - **選択プロトコル（Select Protocol）** - SMB
 
-#. **Next > Create** をクリックする。
+#. **Next > 作成（Create）** をクリックする。
 
 #. *Initials*\ **-WinTools** VMにて、エクスプローラーを開き ``\\BootcampFS.ntnxlab.local\`` にアクセスする。
 
