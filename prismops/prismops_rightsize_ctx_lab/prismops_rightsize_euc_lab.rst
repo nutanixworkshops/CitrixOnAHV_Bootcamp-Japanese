@@ -37,14 +37,14 @@ Prism Opsは、X-FIT機械学習を使用して、管理対象クラスター内
 Prism Opsは、機械学習を使用してデータを分析し、非効率であると学習されたVMに分類を適用します。以下は分類の簡単な説明です。:
 
 * **Overprovisioned（オーバープロビジョニング）:** 割り当てられたリソースの最小量を使用していると特定されたVM。（余剰リソースが多い）
-* **Inactive:** 一定期間電源がオフになっているVM、またはCPU、メモリ、またはI / Oリソースを消費しないVMを実行しているVM。
+* **Inactive（保護無効）:** 一定期間電源がオフになっているVM、またはCPU、メモリ、またはI / Oリソースを消費しないVMを実行しているVM。
 * **Constrained（制約あり）:** 追加のリソースでパフォーマンスが向上するVM。（リソース不足）
 * **Bully:** 多くのリソースを使用し、その結果他のVMに影響を与えると特定されたVM。
 
 
 #. **Prism Central** にてダッシュボードに移動する。 :fa:`bars` **> Dashboard**
 
-#. ダッシュボードから、VM Efficiencyウィジェットを確認する。※このウィジェットは、Prism OpsのX-FIT機械学習が検出した非効率的なVMの概要を提供します。ウィジェットの下部にある ‘View All Inefficeint VMs’ リンクをクリックして、詳細を確認します。
+#. ダッシュボードから、仮想マシン効率（VM Efficiency）ウィジェットを確認する。※このウィジェットは、Prism OpsのX-FIT機械学習が検出した非効率的なVMの概要を提供します。ウィジェットの下部にある ‘非効率な仮想マシンをすべて表示（View All Inefficeint VMs）’ リンクをクリックして、詳細を確認します。
 
    .. figure:: images/ppro_58.png
 
@@ -65,17 +65,17 @@ Prism Opsは、機械学習を使用してデータを分析し、非効率で�
 
    .. figure:: images/ppro_61.png
 
-#. Metrics（メトリック） > CPU使用率に移動する。 ※濃い青色の線と、その周囲の明るい青色の領域に注目してください。濃い青色の線はCPU使用率です。水色の領域は、このVMの予想CPU使用範囲です。このVMは、毎日同じ時間にアップグレードされるアプリケーションを実行しており、X-FITがそのパターンを学習し、それに応じて予想範囲を調整していることを確認します。そして今回は、使用量が予想範囲をはるかに超えているため、このVMで異常が発生していると検知しています。「過去24時間」の時間範囲を縮小して、チャートをより詳しく調べることもできます。
+#. 評価指標（Metrics） > CPU使用率に移動する。 ※濃い青色の線と、その周囲の明るい青色の領域に注目してください。濃い青色の線はCPU使用率です。水色の領域は、このVMの予想CPU使用範囲です。このVMは、毎日同じ時間にアップグレードされるアプリケーションを実行しており、X-FITがそのパターンを学習し、それに応じて予想範囲を調整していることを確認します。そして今回は、使用量が予想範囲をはるかに超えているため、このVMで異常が発生していると検知しています。「過去24時間」の時間範囲を縮小して、チャートをより詳しく調べることもできます。
 
    .. figure:: images/ppro_60.png
 
-#. **Alert Setting** をクリックし、このような状況を検知するためのアラートポリシーを設定する。
+#. **アラート設定（Alert Setting）** をクリックし、このような状況を検知するためのアラートポリシーを設定する。
 
 #. Window右側で、必要に応じていくつかの設定を変更できることを確認する。※下図の例では、行動異常のしきい値を変更して、10％から70％の間の異常を無視しています。他のすべての異常は、警告アラートを生成します。また、このVMのCPU使用率が95％を超える場合、静的しきい値をアラートクリティカルに調整しました。
 
    .. figure:: images/ppro_25.png
 
-#. **Cancel** をクリックし、画面を閉じる。　※キャパシティランウェイの演習と同様の理由により、実際にアラートを生成できる環境ではないため、キャンセルします。
+#. **キャンセル（Cancel）** をクリックし、画面を閉じる。　※キャパシティランウェイの演習と同様の理由により、実際にアラートを生成できる環境ではないため、キャンセルします。
 
 X-Playを利用したメモリの自動追加
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -86,7 +86,7 @@ X-Playを利用したメモリの自動追加
 
    .. figure:: images/rs1.png
 
-#. 現在の **Memory Capacity** を確認する。　※後でX-Playを使用してメモリ容量を増やします。メモリの値はプロパティウィジェット内を下にスクロールすると見つけられます。
+#. 現在の **メモリー容量（Memory Capacity）** を確認する。　※後でX-Playを使用してメモリ容量を増やします。メモリの値はプロパティウィジェット内を下にスクロールすると見つけられます。
 
    .. figure:: images/rs2.png
 
@@ -94,13 +94,13 @@ X-Playを利用したメモリの自動追加
 
    .. figure:: images/rs3.png
 
-#. **REST API** を選択し、 **Action > Clone** をクリックする。
+#. **REST API** を選択し、 **アクション（Action） > クローン（Clone）** をクリックする。
 
    .. figure:: images/rs4.png
 
-#. 以下を入力し **Copy** をクリックする。　※作成しているアクションは、後でPlaybookからチケット発行させるためのものです。※<GTSPrismOpsLabUtilityServer_IP_ADDRESS>は変数なので、IPアドレスを代入してください。
+#. 以下を入力し **コピー（Copy）** をクリックする。　※作成しているアクションは、後でPlaybookからチケット発行させるためのものです。※<GTSPrismOpsLabUtilityServer_IP_ADDRESS>は変数なので、IPアドレスを代入してください。
 
-   - **Name:** *Initials* - Service Ticketの作成
+   - **氏名（Name）:** *Initials* - Service Ticketの作成
    - **Method:** POST
    - **URL:** http://<GTSPrismOpsLabUtilityServer_IP_ADDRESS>/generate_ticket/
    - **Request Body:** ``{"vm_name":"{{trigger[0].source_entity_info.name}}","vm_id":"{{trigger[0].source_entity_info.uuid}}","alert_name":"{{trigger[0].alert_entity_info.name}}","alert_id":"{{trigger[0].alert_entity_info.uuid}}"}``
@@ -112,7 +112,7 @@ X-Playを利用したメモリの自動追加
 
    .. figure:: images/rs6.png
 
-#. サービスチケットの生成を自動化するPlaybookを作成する。上部にある **Create Playbook** をクリックする。
+#. サービスチケットの生成を自動化するPlaybookを作成する。上部にある **プレイブックの作成（Create Playbook）** をクリックする。
 
    .. figure:: images/rs7.png
 
@@ -124,11 +124,11 @@ X-Playを利用したメモリの自動追加
 
    .. figure:: images/rs9.png
 
-#. *Specify VMs* のラジオボタンを選択し、永続デスクトップVMを選択する。　※このVMで発生したアラートに対して自動対処されることを意味します。
+#. *VMsを指定（Specify VMs）* のラジオボタンを選択し、永続デスクトップVMを選択する。　※このVMで発生したアラートに対して自動対処されることを意味します。
 
    .. figure:: images/rs10.png
 
-#. 左側の **Add Action** をクリックし、作成した **Generate Service Ticket** アクションを選択する。注：ラボでは、独自に作成したチケットシステムを設定しましたが、Service Nowにはすぐに使用できるService Nowアクションのテンプレートもあります。
+#. 左側の **アクションの追加（Add Action）** をクリックし、作成した **Generate Service Ticket** アクションを選択する。注：ラボでは、独自に作成したチケットシステムを設定しましたが、Service Nowにはすぐに使用できるService Nowアクションのテンプレートもあります。
 
    .. figure:: images/rs11.png
 
@@ -136,7 +136,7 @@ X-Playを利用したメモリの自動追加
 
    .. figure:: images/rs12.png
 
-#. X-Playによってチケットが作成されたことをメールで通知する。 **Add Action** をクリックし、Emailを選択し、以下を入力する。　※<GTSPrismOpsLabUtilityServer_IP_ADDRESS>は変数なので、IPアドレスを代入してください。
+#. X-Playによってチケットが作成されたことをメールで通知する。 **アクションの追加（Add Action）** をクリックし、Emailを選択し、以下を入力する。　※<GTSPrismOpsLabUtilityServer_IP_ADDRESS>は変数なので、IPアドレスを代入してください。
 
    - **Recipient:** - メールアドレスを入力
    - **Subject :** - ``Service Ticket Pending Approval: {{trigger[0].alert_entity_info.name}}``
@@ -144,11 +144,11 @@ X-Playを利用したメモリの自動追加
 
    .. figure:: images/rs13.png
 
-#. **Save & Close** を選択し、名前を “*Initials* - Generate Service Ticket for Constrained VM” と設定する。 **‘Enabled’ トグルで有効にすることを忘れないでください。**
+#. **保存して閉じる（Save & Close）** を選択し、名前を “*Initials* - Generate Service Ticket for Constrained VM” と設定する。 **‘Enabled’ トグルで有効にすることを忘れないでください。**
 
    .. figure:: images/rs14.png
 
-#. もう一つPlaybookを作成します。これはサービスチケットを解決するときに呼び出すものであり、影響を受けるVMにメモリを追加して電子メールを送信します。テーブルビューの上部にある **Create Playbook** をクリックします。
+#. もう一つPlaybookを作成します。これはサービスチケットを解決するときに呼び出すものであり、影響を受けるVMにメモリを追加して電子メールを送信します。テーブルビューの上部にある **プレイブックの作成（Create Playbook）** をクリックします。
 
    .. figure:: images/rs15.png
 
@@ -160,11 +160,11 @@ X-Playを利用したメモリの自動追加
 
    .. figure:: images/rs17.png
 
-#. 左側の **Add Action** をクリックし、右側で **VM Add Memory** を選択する。
+#. 左側の **アクションの追加（Add Action）** をクリックし、右側で **VM Add Memory** を選択する。
 
    .. figure:: images/rs18.png
 
-#. 以下の画面に従って空のフィールドを設定する。また次に、自動化されたアクションが行われたことを誰かに通知する。 **Add Action** をクリックして、メールアクションを追加する。
+#. 以下の画面に従って空のフィールドを設定する。また次に、自動化されたアクションが行われたことを誰かに通知する。 **アクションの追加（Add Action）** をクリックして、メールアクションを追加する。
 
    .. figure:: images/rs19.png
 
@@ -180,7 +180,7 @@ X-Playを利用したメモリの自動追加
 
    .. figure:: images/rs20.png
 
-#. 最後に、チケットサービスにコールバックして、チケットサービスのチケットを解決する。 **Add Action** をクリックして、 **REST API** アクションを追加する。※<GTSPrismOpsLabUtilityServer_IP_ADDRESS>は変数なので、IPアドレスを代入してください。
+#. 最後に、チケットサービスにコールバックして、チケットサービスのチケットを解決する。 **アクションの追加（Add Action）** をクリックして、 **REST API** アクションを追加する。※<GTSPrismOpsLabUtilityServer_IP_ADDRESS>は変数なので、IPアドレスを代入してください。
 
    - **Method:** PUT
    - **URL:** http://<GTSPrismOpsLabUtilityServer_IP_ADDRESS>/resolve_ticket
@@ -189,7 +189,7 @@ X-Playを利用したメモリの自動追加
 
    .. figure:: images/rs21.png
 
-#. **Save & Close** をクリックし、名前は “*Initials* - Resolve Service Ticket” とする。 ** ‘Enabled’ トグルで有効化することを忘れないでください。**
+#. **保存して閉じる（Save & Close）** をクリックし、名前は “*Initials* - Resolve Service Ticket” とする。 ** ‘Enabled’ トグルで有効化することを忘れないでください。**
 
    .. figure:: images/rs22.png
 
@@ -213,7 +213,7 @@ X-Playを利用したメモリの自動追加
 
    .. figure:: images/rs27.png
 
-#. Prism Centralコンソールを開いた状態で前のタブに戻る。 **`Initials` - Resolve Service Ticket** の詳細を開き **Plays** タブを表示することで、このプレイブックで実行された内容を確認できる。
+#. Prism Centralコンソールを開いた状態で前のタブに戻る。 **`Initials` - Resolve Service Ticket** の詳細を開き **プレイ（Plays）** タブを表示することで、このプレイブックで実行された内容を確認できる。
 
    .. figure:: images/rs29.png
 
