@@ -23,7 +23,7 @@ Windows Tools VMのデプロイ
 #. 以下を入力する:
 
    - **Name** - *Initials*-WinToolsVM
-   - **Description** - (オプション) WinToolsVM.
+   - **Description** - WinToolsVM
    - **vCPU(s)** - 2
    - **Number of Cores per vCPU** - 1
    - **Memory** - 4 GiB
