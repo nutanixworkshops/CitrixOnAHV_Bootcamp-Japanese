@@ -144,7 +144,7 @@ X-Playを利用したメモリの自動追加
 
    .. figure:: images/rs13.png
 
-#. **Save & Close** を選択し、名前を “*Initials* - Generate Service Ticket for Constrained VM” と設定する。 **‘Enabled’ トグルで有効にすることを忘れないでください。** 
+#. **Save & Close** を選択し、名前を “*Initials* - Generate Service Ticket for Constrained VM” と設定する。 **‘Enabled’ トグルで有効にすることを忘れないでください。**
 
    .. figure:: images/rs14.png
 
