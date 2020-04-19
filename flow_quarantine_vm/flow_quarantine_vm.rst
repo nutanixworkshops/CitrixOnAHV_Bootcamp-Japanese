@@ -11,9 +11,9 @@ Flowによるデスクトップの隔離（Quarantine)
 SecOps VMのカテゴライズ
 ++++++++++++++++++++++++++
 
-#. **Prism Central** で :fa:`bars` **> Virtual Infrastructure > Categories** と選択する。
+#. **Prism Central** で :fa:`bars` **> 仮想インフラ（Virtual Infrastructure） > カテゴリ（Categories）** と選択する。
 
-#. **AppType** のチェックボックスを選択し、 **Actions > Update** をクリックする。
+#. **AppType** のチェックボックスを選択し、 **アクション（Actions） > Update** をクリックする。
 
    .. figure:: images/12.png
 
@@ -23,15 +23,15 @@ SecOps VMのカテゴライズ
 
    .. figure:: images/13.png
 
-#. **Save** をクリックする。
+#. **保存（Save）** をクリックする。
 
-#. **Prism Central** で :fa:`bars` **> Virtual Infrastructure > VMs** を選択する。
+#. **Prism Central** で :fa:`bars` **> 仮想インフラ（Virtual Infrastructure） > 仮想マシン（VMs）** を選択する。
 
-#. *Initials*\ **WinToolsVM** のチェックボックスにチェックを入れ、 **Actions > Manage Categories** とクリックする。
+#. *Initials*\ **WinToolsVM** のチェックボックスにチェックを入れ、 **アクション（Actions） > カテゴリの管理（Manage Categories）** とクリックする。
 
    .. figure:: images/14.png
 
-#. **AppType:**\ *Initials*-**SecOps** を検索し、 **Save** をクリックし、VMにカテゴリを割り当てる。
+#. **AppType:**\ *Initials*-**SecOps** を検索し、 **保存（Save）** をクリックし、VMにカテゴリを割り当てる。
 
    .. figure:: images/15.png
 
@@ -49,53 +49,53 @@ SecOps VMのカテゴライズ
 
 #. また、 *Initials*\ **WinToolsVM** で **Command Prompt** を起動し、 ``ping -t XYZ-PD-1-VM-IP`` を実行しクライアントから仮想デスクトップへの疎通を確認する。（隔離後にどうなるか確認するため）
 
-#. **Prism Central > Virtual Infrastructure > VMs** と進み、 *Initials*\ **-PD-1** と *Initials*\ **-PD-2** のチェックボックスにチェックをいれる。
+#. **Prism Central > 仮想インフラ（Virtual Infrastructure） > 仮想マシン（VMs）** と進み、 *Initials*\ **-PD-1** と *Initials*\ **-PD-2** のチェックボックスにチェックをいれる。
 
-#. **Actions > Quarantine VMs** をクリックする。
+#. **アクション（Actions） > Quarantine VMs** をクリックする。
 
    .. figure:: images/1.png
 
-#. **Forensic** をクリックし、 **Quarantine** をクリックする。
+#. **フォレンジック（Forensic）** をクリックし、 **隔離（Quarantine）** をクリックする。
 
    Windows Tools VMから実行していたpingはどうなっていますか？
 
 カスタムQuarantine Policyの作成
 +++++++++++++++++++++++++++++++++++
 
-#. **Prism Central** にて :fa:`bars` **> Policies > Security Policies > Quarantine** と進み、検疫中のVMを確認する。
+#. **Prism Central** にて :fa:`bars` **> ポリシー（Policies） > セキュリティポリシー（Security Policies） > Quarantine** と進み、検疫中のVMを確認する。
 
-#. **Update** をクリックし、Quarantine policyを編集する。
+#. **更新（Update）** をクリックし、Quarantine policyを編集する。
 
    このFlowポリシーの機能を説明するために、Windows Tools VMを「フォレンジックツール」として追加します。本番環境では、隔離されたVMへのインバウンドアクセスを許可されたVMを使用して、Kali LinuxやSANS SIFTなどのセキュリティおよびフォレンジックスイートを実行できます。
 
-#. **Next** をクリックし、ポリシー編集画面に移動する。
+#. **次へ（Next）** をクリックし、ポリシー編集画面に移動する。
 
-#. **Inbound** にて **+ Add Source** をクリックする。
+#. **インバウンド（Inbound）** にて **+ 移行元を追加（+ Add Source）** をクリックする。
 
 #. 以下を入力する。:
 
-   - **Add source by:** - **Category** を選択
+   - **Add source by:** - **Category（カテゴリ）** を選択
    - **AppType:**\ *Initials*-**SecOps** を指定
 
    .. figure:: images/16.png
 
-#. **Add** をクリックする。
+#. **追加（Add）** をクリックする。
 
    このソースはどのターゲットに接続できますか？ Forensic(フォレンジック)とStrict(厳格)の隔離モードの違いは何ですか？
 
    VMを **Strict** （厳格）な検疫ポリシーに追加すると、VMへのすべてのインバウンドおよびアウトバウンド通信が無効になることに注意してください。 **Strict** （厳格）なポリシーは、ネットワーク上の環境への脅威となる仮想マシンに適用します。
 
-#. **Quarantine: Forensic** の左側にある :fa:`plus-circle` アイコンをクリックし、受信ルールを追加する。
+#. **Quarantine: フォレンジック（Forensic）** の左側にある :fa:`plus-circle` アイコンをクリックし、受信ルールを追加する。
 
-#. **Save** をクリックし、SecOpsカテゴリのVMと **Quarantine: Forensic** カテゴリのVMで、全てのポートのプロトコルを許可する。
+#. **保存（Save）** をクリックし、SecOpsカテゴリのVMと **Quarantine: フォレンジック（Forensic）** カテゴリのVMで、全てのポートのプロトコルを許可する。
 
    .. figure:: images/17.png
 
-#. **Next** をクリックし、 **Apply Now** をクリックしてポリシーを適用する。
+#. **次へ（Next）** をクリックし、 **ここで適用する（Apply Now）** をクリックしてポリシーを適用する。
 
    Windows Tools VMから実行していたpingはどうなっていますか？
 
-#. Prism CentralでVMを選択し、 **Actions > Unquarantine VMs** をクリックして、 **Quarantine: Forensic** カテゴリからデスクトップVMを削除できます。
+#. Prism CentralでVMを選択し、 **アクション（Actions） > Unquarantine VMs** をクリックして、 **Quarantine: フォレンジック（Forensic）** カテゴリからデスクトップVMを削除できます。
 
 
 お持ち帰り
