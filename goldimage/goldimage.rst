@@ -20,7 +20,7 @@ Windows Client OSは通常物理デバイス上（ラップトップPCなど）�
 #. 以下を入力する:
 
    - **Name** - *Initials*\ -GoldImage
-   - **Description** - (オプション) WinToolsVM.
+   - **Description** -
    - **vCPU(s)** - 2
    - **Number of Cores per vCPU** - 1
    - **Memory** - 4 GiB
@@ -89,7 +89,7 @@ Virtual Delivery Agent（VDA）は、ユーザー各物理マシンまたは仮�
    - **Operation（オペレーション）** - Clone from Image Service（イメージサービスからクローン）
    - **Image（イメージ）** - Citrix_Virtual_Apps_and_Desktops_7_1912.iso
 
-#. ** Update > Save** をクリック。
+#. **Update > Save** をクリック。
 
 #. ゴールドイメージVMのコンソールにて **D:\\AutoSelect.exe** を開きCitrix installerを起動。
 
@@ -99,7 +99,7 @@ Virtual Delivery Agent（VDA）は、ユーザー各物理マシンまたは仮�
 
    .. figure:: images/4.png
 
-#. **Prepare Machines and Images** を選択し、Virtual Desktop Agentのインストールを開始する。
+#. **Prepare Machines and Images** を選択し、Virtual Delivery Agentのインストールを開始する。
 
    .. figure:: images/5.png
 
@@ -144,7 +144,7 @@ Citrix Optimizerの実行
 
    .. figure:: images/12.png
 
-#. 3.	ゴールドイメージに使用されているWindowsビルドに基づいて、推奨される(Recommendedと表示の)テンプレートをクリック。
+#. ゴールドイメージに使用されているWindowsビルドに基づいて、推奨される(Recommendedと表示の)テンプレートをクリック。
 
    .. figure:: images/13.png
 
@@ -186,13 +186,13 @@ VMware OS Optimization Toolの実行
 
    .. figure:: images/18.png
 
-#. 6.	結果を確認して、ゴールドイメージVMを再起動する。
+#. 結果を確認して、ゴールドイメージVMを再起動する。
 
 ゴールドイメージの完成
 +++++++++++++++++++++++++
 
 Citrix XenDesktopは、ゴールドイメージのスナップショットを利用してデスクトップのプールをプロビジョニングします。
-従来のスナップショットはチェーン構造であり、長いスナップショットチェーンを走査するとパフォーマンスが低下する可能性がありましたが、Nutanixのスナップショットはリダイレクトオンライトアルゴリズムを採用しており、このような欠点はありません。
+従来のスナップショットはチェーン構造であり、長いスナップショットチェーンを走査するとパフォーマンスが低下する可能性がありましたが、NutanixのスナップショットはRedirect-on-Writeアルゴリズムを採用しており、このような欠点はありません。
 この違いにより、ゴールドイメージスナップショットを使用して、単一のVMから多くのゴールドイメージバージョンを維持する柔軟性が得られます。
 
 
@@ -200,7 +200,7 @@ Citrix XenDesktopは、ゴールドイメージのスナップショットを利
 
 #. ゴールドイメージVMの再起動完了後、仮想マシン内からシャットダウンを実行。
 
-#. **Prism Element**, からゴールドイメージVMのスナップショットを取得する。 (名前は *Initials Post optimization and VDA install*)
+#. **Prism Element** からゴールドイメージVMのスナップショットを取得する。 (名前は *Initials Post optimization and VDA install*)
 
    .. figure:: images/20.png
 

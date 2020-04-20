@@ -11,7 +11,7 @@ Prism Opsは、お客様のIT運用にスマートな自動化をもたらしま
 ラボの準備
 +++++++++
 
-#. **Prism Central** にて **VMs** ページに移動し、 **GTSPrismOpsLabUtilityServer** のIPアドレスを控える。※この後の演習にてこのIPアドレスにアクセスします。
+#. **Prism Central** にて **仮想マシン（VMs）** ページに移動し、 **GTSPrismOpsLabUtilityServer** のIPアドレスを控える。※この後の演習にてこのIPアドレスにアクセスします。
 
    .. figure:: images/init1.png
 
@@ -32,7 +32,7 @@ Prism Opsは、お客様のIT運用にスマートな自動化をもたらしま
 
 キャパシティランウェイとは、特定のクラスターまたはノード内のリソース残量の尺度です。 全体的なクラスターのランウェイだけでなく、CPU、メモリ、ストレージ容量の個々の測定値があります。キャパシティランウェイは、Prism OpsのマシンインテリジェンスエンジンであるX-FITを使用して計算されます。
 
-#. **Prism Central > Operations > Planning > Capacity Runway** と進む。
+#. **Prism Central > オペレーション（Operations） > 計画（Planning） > 容量のランウェイ（Capacity Runway）** と進む。
 
    - ランウェイのサマリから各クラスターのランウェイを確認する
    - メモリ、CPU、ストレージが枯渇するまでどれくらいとなっていますか？
@@ -45,7 +45,7 @@ Prism Opsは、お客様のIT運用にスマートな自動化をもたらしま
 
    .. figure:: images/ppro_13.png
 
-#. 画面左側の **‘Optimize Resources’** をクリックする。※PrismOpsは環境内の非効率的なVMを確認し、これらのリソースを可能な限り効率的に最適化する方法を提案します。
+#. 画面左側の **リソースの最適化（Optimize Resources）** をクリックする。※PrismOpsは環境内の非効率的なVMを確認し、これらのリソースを可能な限り効率的に最適化する方法を提案します。
 
    .. figure:: images/ppro_14.png
 
@@ -56,9 +56,9 @@ Prism Opsは、お客様のIT運用にスマートな自動化をもたらしま
 
 Prism OpsのX-FITエンジンは、将来のワークロードを計画する機能も提供し、新しいワークロードのリソース要件に対応するために追加できるハードウェアを提案します。
 
-#. ページ左側にある **‘Adjust Resources’** にて、 **‘Get Started’** ボタンをクリックする。※ここで、新しいワークロードの計画を入力し、今後のリソースランウェイを延長する必要があるかどうかを確認できます。
+#. ページ左側にある **リソースの調整（Adjust Resources）** にて、 **はじめに（Get Started）** ボタンをクリックする。※ここで、新しいワークロードの計画を入力し、今後のリソースランウェイを延長する必要があるかどうかを確認できます。
 
-#. 画面左側の **add/adjust** をクリックする。
+#. 画面左側の **追加/調整（add/adjust）** をクリックする。
 
    .. figure:: images/ppro_15.png
 
@@ -70,7 +70,7 @@ Prism OpsのX-FITエンジンは、将来のワークロードを計画する機
 
 #. 同様の操作を実施し、適当なワークロードを追加する。
 
-#.  **‘Recommend’** ボタンをクリックする。
+#. **推奨（Recommend）** ボタンをクリックする。
 
    .. figure:: images/ppro_18.png
 
@@ -78,7 +78,7 @@ Prism OpsのX-FITエンジンは、将来のワークロードを計画する機
 
    .. figure:: images/ppro_19.png
 
-#. 画面右上にある **Generate PDF** ボタンをクリックする。※これにより作成したシナリオの報告書を自動生成してくれます。
+#. 画面右上にある **PDFを作成（Generate PDF）** ボタンをクリックする。※これにより作成したシナリオの報告書を自動生成してくれます。
 
    .. figure:: images/ppro_19b.png
 
@@ -95,7 +95,7 @@ X-Playによる容量予測レポートの自動生成
 
    .. figure:: images/cap1.png
 
-#. **Create Playbook** をクリックする。
+#. **プレイブックの作成（Create Playbook）** をクリックする。
 
    .. figure:: images/cap2.png
 
@@ -107,7 +107,7 @@ X-Playによる容量予測レポートの自動生成
 
    .. figure:: images/cap4.png
 
-#. 左側のアクションにて **Add Action** を選択し、 **Generate Forecast Report** を選択する。　※これは前項で設定したアラートを検知した後に、まずレポートを生成するということを意味します。
+#. 左側のアクションにて **アクションの追加（Add Action）** を選択し、 **Generate Forecast Report** を選択する。　※これは前項で設定したアラートを検知した後に、まずレポートを生成するということを意味します。
 
    .. figure:: images/cap5.png
 
@@ -131,7 +131,7 @@ X-Playによる容量予測レポートの自動生成
 
    .. figure:: images/cap8.png
 
-#. **Save & Close** をクリックし、 “*Initials* - Automatically Generate Forecast Report” という名前で保存する。 ** ‘Enabled’ のトグルで有効にしてください。**
+#. **保存して閉じる（Save & Close）** をクリックし、 “*Initials* - Automatically Generate Forecast Report” という名前で保存する。 ** ‘Enabled’ のトグルで有効にしてください。**
 
    .. figure:: images/cap9.png
 
@@ -139,7 +139,7 @@ X-Playによる容量予測レポートの自動生成
 
    .. figure:: images/cap11.png
 
-#. **Plays** タブに切り替える。もし実際にアラートが発生したら、下図の様な画面でPlaybookの実行を確認できます。
+#. **プレイ（Plays）** タブに切り替える。もし実際にアラートが発生したら、下図の様な画面でPlaybookの実行を確認できます。
 
    .. figure:: images/cap12.png
 

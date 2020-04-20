@@ -29,7 +29,7 @@ Nutanixを使用すると、Prismのワンクリック操作で1ノード以上�
 
    .. figure:: images/3.png
 
-#.  **number of Machines for this Delivery Group** に **1** を指定し、 **Next > Finish** をクリックする。
+#. **number of Machines for this Delivery Group** に **1** を指定し、 **Next > Finish** をクリックする。
 
    .. note::
 
