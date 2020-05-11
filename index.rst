@@ -45,7 +45,7 @@ AHVブートキャンプのNutanix Citrixへようこそ！この演習では、
 - 非永続デスクトップ
 - Filesの利用
 - Flowの利用
-- Prism Opsの利用
+- Prism Proの利用
 
 イントロダクション
 +++++++++++++
