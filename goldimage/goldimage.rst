@@ -1,76 +1,70 @@
 .. _citrixgoldimage:
 
 ------------------------------------
-Building & Optimizing the Gold Image
+ゴールドイメージの構築と最適化
 ------------------------------------
 
-When we install a vanilla client operating system, we need to keep in mind that this OS was built for physical devices (i.e. laptops and desktops), with direct attached devices and limited noisy neighbor effects. If we install that same OS in a VM we might see different results, hence the need for optimization. The Nutanix Performance/Solutions Engineering team for EUC has tested various optimizations and the lab, and validated the following results:
+Windows Client OSは通常物理デバイス上（ラップトップPCなど）で動作することを前提としており、ハードウェアデバイスに直接接続され、また同ホスト上の負荷が高い仮想マシンに影響を受けるなどが発生しないことを想定しております。そのため、そのOSをVMとしてインストールすると想定外の動作をする可能性があり、仮想環境上で動作させるための最適化が必要です。
 
-.. figure:: images/19.png
+この演習では、Windows 10 VMにCitrix Virtual Desktop Agentをインストールし、Citrix OptimizerとVMware OS Optimization Toolの両方を使用してVMを最適化します。
 
-As you can see there’s a 48% improvement of desktop density per node when applying baseline Citrix optimizations, and increases to 57% with a second pass using VMware OS optimization recommendations. Note that both sets of optimizations are independent of underlying hypervisor, and rather tune services within the OS guest.
-
-**In this lab you will install the Citrix Virtual Desktop Agent on a Windows 10 VM, and optimize the VM using both the Citrix Optimizer and VMware OS Optimization Tool.**
-
-Deploying a VM
+ゴールドイメージ用VMの構築
 ++++++++++++++
 
-#. In **Prism Central**, select :fa:`bars` **> Virtual Infrastructure > VMs**.
+#. Prism Centralで :fa:`bars` > **仮想インフラ（Virtual Infrastructure）** > **仮想マシン（VMs）** を選択。
 
    .. figure:: images/1.png
 
-#. Click **Create VM**.
+#. **仮想マシンを作成（Create VM）** をクリック。
 
-#. Select your assigned cluster and click **OK**.
-
-#. Fill out the following fields:
+#. 以下を入力する:
 
    - **Name** - *Initials*\ -GoldImage
-   - **Description** - (Optional) Description for your VM.
+   - **Description** -
    - **vCPU(s)** - 2
    - **Number of Cores per vCPU** - 1
    - **Memory** - 4 GiB
 
-   - Select **+ Add New Disk**
-       - **Type** - DISK
-       - **Operation** - Clone from Image Service
-       - **Image** - Win10v1903.qcow2
-       - Select **Add**
+   - **+ Add New Disk** をクリック
+       - **Type（タイプ）** - DISK
+       - **Operation（オペレーション）** - Clone from Image Service（イメージサービスからクローン）
+       - **Image（イメージ）** - Win10v1903.qcow2
+       - **Add** をクリック
 
-   - Select **Add New NIC**
+   - **Add New NIC** をクリック
        - **VLAN Name** - Secondary
-       - Select **Add**
+       - **Add** をクリック
 
-#. Click **Save** to create the VM.
+#. **Save** をクリックしVMを作成する.
 
-#. Select your VM and click **Power On**.
+#. 作成したVMのチェックボックスをクリックし **Actions（アクション） > Power On（パワーオン）** .
 
 .. _CtxPausingUpdates:
 
-Pausing Updates
+Windows Updatesの停止
 +++++++++++++++
 
-Before starting to build your **Windows 10** image it is important the ensure that no Windows Updates are in progress, as this can cause issues with cloning.
+Windows 10ゴールドイメージの構築を開始する前に、Windows Updateが進行中でないことを確認することが重要です。Windows Updateによりクローン作成で問題が発生する可能性があります。
 
-#. Open the VM console or connect via RDP.
+#. 作成したVMのチェックボックスをクリックし **Actions（アクション） > Launch Console（コンソールの起動）**
 
    - **User Name** - Nutanix
    - **Password** - nutanix/4u
 
-#. Open **System Settings > Windows Update** and click **Pause Updates for 7 Days**.
+#. **System Settings > Windows Update** を開き **Pause Updates for 7 Days** をクリックする。
 
    .. figure:: images/24.png
 
-#. Restart the VM.
+#. VMを再起動する。
 
-Installing the VDA
+VDAのインストール
 ++++++++++++++++++
 
-The Virtual Delivery Agent (VDA) is a collection of drivers and services installed on each physical or virtual machine available for user connection. The VDA allows the machine to register with the Delivery Controller, allowing the Delivery Controller to assign those resources to users. The VDA is also responsible for establishing the HDX connection, the Citrix remoting protocol, between the machine and the user device, verifying licensing, and applying Citrix Policy.
+Virtual Delivery Agent（VDA）は、ユーザー各物理マシンまたは仮想マシンに接続時に必要なドライバーとサービスのコレクションです。VDAにより、仮想デスクトップ用のマシンをDelivery Controllerに登録して、またDelivery Controllerがこれらのマシンをユーザーに割り当てることができます。VDAは、マシンとユーザーデバイス間のHDX接続、Citrixリモートプロトコルの確立、ライセンスの確認、Citrixポリシーの適用も担当します。
 
-#. Once the VM has restarted, reconnect to the VM console or connect via RDP.
+#. VMのコンソールで再起動完了を確認する。
 
-#. Change the **Computer Name** (e.g. *Initials*\ -GoldImage) and join the **NTNXLAB.local** domain using the following credentials:
+#. **Computer Name** (e.g. *Initials*\ -GoldImage) を変更し以下の資格情報で **NTNXLAB.local** に参加する:
 
    - **User Name** - NTNXLAB\\Administrator
    - **Password** - nutanix/4u
@@ -79,136 +73,146 @@ The Virtual Delivery Agent (VDA) is a collection of drivers and services install
 
    .. note::
 
-      Open **Control Panel > System and Security > System > Change Settings** to access the traditional Windows domain join field in Windows 10.
+       **Control Panel > System and Security > System > Change Settings** とアクセスすることで上記画面に遷移できます。
 
-#. Restart your VM and log in using the following credentials:
+#. VMを再起動し、以下の資格情報でログイン。:
 
    - **User Name** - NTNXLAB\\Administrator
    - **Password** - nutanix/4u
 
-#. In **Prism Central**, select your GoldImage VM and click **Actions > Update**.
+#. **Prism Central** でゴールドイメージVM のチェックボックスを選択し **Actions（アクション） > Update（更新）** をクリック。
 
    .. figure:: images/2.png
 
-#. Under **Disks > CD-ROM**, select :fa:`pencil` and fill out the following fields:
+#. **Disks > CD-ROM**　を選択し :fa:`pencil` をクリックし以下を入力:
 
-   - **Operation** - Clone from Image Service
-   - **Image** - Citrix_Virtual_Apps_and_Desktops_7_1912.iso
+   - **Operation（オペレーション）** - Clone from Image Service（イメージサービスからクローン）
+   - **Image（イメージ）** - Citrix_Virtual_Apps_and_Desktops_7_1912.iso
 
-#. Click **Update > Save**.
+#. **Update > Save** をクリック。
 
-#. Within the VM console, open **D:\\AutoSelect.exe** to launch the Citrix installer.
+#. ゴールドイメージVMのコンソールにて **D:\\AutoSelect.exe** を開きCitrix installerを起動。
 
    .. figure:: images/3.png
 
-#. Select **Virtual Apps and Desktops > Start**.
+#. **Virtual Apps and Desktops > Start** を選択
 
    .. figure:: images/4.png
 
-#. Select **Prepare Machines and Images** to begin installation of the Virtual Desktop Agent.
+#. **Prepare Machines and Images** を選択し、Virtual Delivery Agentのインストールを開始する。
 
    .. figure:: images/5.png
 
-#. Select **Create a MCS master image** and click **Next**.
+#. **Create a MCS master image** を選択し **Next** をクリック。
 
    .. figure:: images/6.png
 
-#. Under **Core Components**, select **Citrix Workspace App** in addition to the default **Virtual Desktop Agent** selection. Click **Next**.
+#. **Core Components** 画面で、デフォルトの **Virtual Desktop Agent** に加えて **Citrix Workspace App** を選択し **Next** をクリック。
 
    .. figure:: images/6b.png
 
-#. Under **Additional Components**, select **Citrix User Personalization Layer** in addition to the default selections, and click **Next**.
+#. **Additional Components** 画面で、デフォルトに加えて **Citrix User Personalization Layer** を選択し **Next** をクリック。
 
    .. figure:: images/7.png
 
-#. Under **Delivery Controller**, select **Let Machine Creation Services do it automatically** from the drop down, and click **Next**..
+#. **Delivery Controller** 画面で、ドロップダウンから **Let Machine Creation Services do it automatically** を選択し、 **Next** をクリック。
 
    .. figure:: images/8.png
 
-# Under **Features**, click **Next**.
+#. **Features** 画面で **Next** をクリック。
 
    .. figure:: images/9.png
 
-#. Allow the installer to automatically configure required Windows Firewall port accessibility, click **Next**.
+#. インストーラーが推奨するファイアーウォール設定をそのまま適用し **Next** をクリック。
 
-#. Click **Install** to begin the VDA installation. This process should take approximately 5 minutes.
+#. **Install** をクリックしVDAのインストールを開始する。 （インストールプロセスは5分ほど要します。）
 
-#. When prompted, de-select **Collect diagnostic information** for Citrix Call Home and click **Next**.
+#. 次の画面に移行したら **Collect diagnostic information** の選択を解除し **Next** をクリック。
 
    .. figure:: images/10.png
 
-#. Click **Finish** and wait for the VM to restart.
+#. **Finish** をクリックしVMの再起動を待ちます。
 
-Running Citrix Optimizer
+Citrix Optimizerの実行
 ++++++++++++++++++++++++
 
-#. Within the VM console, download http://10.42.194.11/workshop_staging/CitrixOptimizer.zip and extract to a directory.
+#. VMコンソール内でブラウザを起動し、http://10.42.194.11/workshop_staging/CitrixOptimizer.zip を入力してダウンロード。
+     VMコンソール内はUSキーボード配置になっているので注意。
+     [:] -> [Shift + ;] 、 [ _ ] -> [Shift + =]
 
-#. Right-click **CitrixOptimizer.exe** and select **Run as Administrator**.
+#. **CitrixOptimizer.exe** を右クリックし **Run as Administrator** をクリック。
 
    .. figure:: images/12.png
 
-#. Select the recommended optimization template based on the Windows build being used for the gold image.
+#. ゴールドイメージに使用されているWindowsビルドに基づいて、推奨される(Recommendedと表示の)テンプレートをクリック。
 
    .. figure:: images/13.png
 
-#. Click **Select All** to select all available optimizations and click **Analyze**.
+#. **Select All** を選択し、クリックして、使用可能なすべての最適化を選択し、 **Analyze** をクリック。
 
    .. figure:: images/14.png
 
-#. Click **View Results** to see a detailed report of the status of each available optimization.
+#. **View Results** をクリックすると、利用可能な各最適化のステータスの詳細レポートを表示できる。
 
-#. Return to the **Citrix Optimizer** and click **Done > Optimize** to apply the selected optimizations.
+#. **Citrix Optimizer** に戻り、 **Done > Optimize** をクリックして、選択した最適化を適用。
 
    .. figure:: images/15.png
 
-#. Once the tool has completed, you can click **View Results** to view an updated report. You can now close the tool.
+#. ツールが完了したら、 **View Results** をクリックして、更新されたレポートを表示できます。 **Done** をクリックし、Window右上×ボタンでツールを閉じる。
 
-Running VMware OS Optimization Tool
+VMware OS Optimization Toolの実行
 +++++++++++++++++++++++++++++++++++
 
-#. Within the VM console, download http://10.42.194.11/workshop_staging/VMwareOSOptimizationTool.zip and extract to a directory.
+#. VMコンソール内でブラウザを開き、 http://10.42.194.11/workshop_staging/VMwareOSOptimizationTool.zip にアクセス、ダウンロードし、ダウンロードディレクトリ内に展開する。
+     VMコンソール内はUSキーボード配置になっているので注意。
+     [:] -> [Shift + ;] 、 [ _ ] -> [Shift + =]
 
-#. Right-click **VMwareOSOptimizationTool.exe** and select **Run as Administrator**.
 
-#. Click the **Select All** checkbox. Scroll down to **Cleanup Jobs** and un-select the 4 available optimizations. Click **Analyze**.
+#. **VMwareOSOptimizationTool.exe** を右クリックし、 **Run as Administrator** を選択する。
+
+#. **Select All** のチェックボックスをクリック。 **Cleanup Jobs** の項目までスクロールし、該当の4項目のチェックを外し、 **Analyze** をクリックする。
 
    .. figure:: images/16.png
 
    .. note::
 
-      The Cleanup Jobs are excluded from this exercise as they can be time consuming to apply.
+      クリーンアップジョブは適用に時間がかかる為、今回の演習からは除外します。
 
-#. Note the outstanding optimizations not applied in the **Analysis Summary** pane.
+#. **Analysis Summary** ペインで適用する最適化項目の内訳が確認できます。
 
    .. figure:: images/17.png
 
-#. Click **Optimize** to apply the remaining optimizations.
+#. **Optimize** をクリックし最適化を適用する。
 
    .. figure:: images/18.png
 
-#. Review the results and then restart your Gold Image VM.
+#. 結果を確認して、ゴールドイメージVMを再起動する。
 
-Completing the Gold Image
+ゴールドイメージの完成
 +++++++++++++++++++++++++
 
-XenDesktop provisions pools of desktops based on a hypervisor snapshot of the gold image. Unlike traditional hypervisors which can experience performance degradation from traversing long snapshot chains, Nutanix's redirect-on-write algorithm for implementing snapshots has no such drawback. This difference allows for flexibility in using gold image snapshots to maintain many gold image versions from a single VM. Watch `this video <https://youtu.be/uK5wWR44UYE>`_ for additional details on how Nutanix implements snapshots and cloning.
+Citrix XenDesktopは、ゴールドイメージのスナップショットを利用してデスクトップのプールをプロビジョニングします。
+従来のスナップショットはチェーン構造であり、長いスナップショットチェーンを走査するとパフォーマンスが低下する可能性がありましたが、NutanixのスナップショットはRedirect-on-Writeアルゴリズムを採用しており、このような欠点はありません。
+この違いにより、ゴールドイメージスナップショットを使用して、単一のVMから多くのゴールドイメージバージョンを維持する柔軟性が得られます。
 
-#. Once restarted, Perform a graceful shutdown of the VM from within the guest.
 
-#. From **Prism Element**, take a snapshot of the VM (e.g. *Initials Post optimization and VDA install*)
+※詳細は http://nutanixbible.jp/#anchor-スナップショットとクローン-80 を参照
+
+#. ゴールドイメージVMの再起動完了後、仮想マシン内からシャットダウンを実行。
+
+#. **Prism Element** からゴールドイメージVMのスナップショットを取得する。 (名前は *Initials Post optimization and VDA install*)
 
    .. figure:: images/20.png
 
    .. note::
 
-      This snapshot **must** be taken from Prism Element in order to be recognized by the Citrix AHV plug-in.
+      このスナップショットは、Citrix AHVプラグインによって認識されるために、Prism Elementから取得する必要があります。
 
-Takeaways
+お持ち帰り
 +++++++++
 
-What are the key things learned in this exercise?
+この演習で学んだ重要なこと
 
-- Using MCS helps simplify the gold image by not having to manually specify (or depend on Active Directory to specify) what XenDesktop Delivery Controller(s) with which the image should attempt to register. This allows more flexibility in having a single gold image support multiple environments without external dependencies.
+- MCSを使用すると、イメージを登録するXenDesktop Delivery Controllerを手動で指定する（またはActive Directoryに依存して指定する）必要がないため、ゴールドイメージを簡素化できます。これにより、単一のゴールドイメージが外部の依存関係なしに複数の環境をサポートする柔軟性が高まります。
 
-- EUC image optimization tools are not solution or hypervisor specific and can be easily applied to improve virtual desktop performance and increase host density.
+- EUCイメージ最適化ツールは、ソリューションまたはハイパーバイザー固有ではなく、仮想デスクトップのパフォーマンスを向上させ、ホスト密度（ホストあたりの仮想マシン数）を高めるために簡単に適用できます。

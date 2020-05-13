@@ -1,105 +1,106 @@
 .. _euccitrixflow_quarantine_vm:
 
 -------------------------------
-Quarantining Desktops with Flow
+Flowによるデスクトップの隔離（Quarantine)
 -------------------------------
 
-Quarantine places a VM in a restricted policy, giving the admin an option to either block all network traffic or allow a limited subset of traffic. Strict quarantine blocks a VM from all communication, while forensic quarantine allows a pre-defined list of inbound and outbound traffic. This capability can be very helpful in a virtual desktop environment when a VM has been impacted by malware.
+隔離（Quarantine）は制限されたポリシーにVMを配置し、管理者にすべてのネットワークトラフィックをブロックするか、トラフィックの限られたサブセットを許可するオプションを与えます。Strict quarantine（厳密な検疫）はすべての通信からVMをブロックしますが、Forensic quarantine（フォレンジック検疫）は着信および発信トラフィックの事前定義されたリストを許可します。この機能は、VMがマルウェアの影響を受けている仮想デスクトップ環境で非常に役立ちます。
 
-**In this lab we will place a desktop VM into quarantine and observe the behavior of the VM. We will also inspect the configurable options inside the quarantine policy to simulate troubleshooting an infected VM.**
+**このラボでは、デスクトップVMを検疫に配置し、VMの動作を観察します。また、隔離ポリシー内の構成可能なオプションを検査して、感染したVMのトラブルシューティングをシミュレートします。**
 
-Categorizing the SecOps VM
+SecOps VMのカテゴライズ
 ++++++++++++++++++++++++++
 
-#. In **Prism Central**, select :fa:`bars` **> Virtual Infrastructure > Categories**.
+#. **Prism Central** で :fa:`bars` **> 仮想インフラ（Virtual Infrastructure） > カテゴリ（Categories）** と選択する。
 
-#. Select the checkbox for **AppType** and click **Actions > Update**.
+#. **AppType** のチェックボックスを選択し、 **アクション（Actions） > Update** をクリックする。
 
    .. figure:: images/12.png
 
-#. Click the :fa:`plus-circle` icon beside the last value to add an additional Category value.
+#. 最後の値の右にある :fa:`plus-circle` アイコンをクリックする。
 
-#. Specify *Initials*-**SecOps**  as the value name.
+#. *Initials*-**SecOps** と入力する。
 
    .. figure:: images/13.png
 
-#. Click **Save**.
+#. **保存（Save）** をクリックする。
 
-#. In **Prism Central**, select :fa:`bars` **> Virtual Infrastructure > VMs**.
+#. **Prism Central** で :fa:`bars` **> 仮想インフラ（Virtual Infrastructure） > 仮想マシン（VMs）** を選択する。
 
-#. Use the checkbox to select the *Initials*\ **WinToolsVM** and navigate to **Actions > Manage Categories**.
+#. *Initials*\ **WinToolsVM** のチェックボックスにチェックを入れ、 **アクション（Actions） > カテゴリの管理（Manage Categories）** とクリックする。
 
    .. figure:: images/14.png
 
-#. Specify **AppType:**\ *Initials*-**SecOps** in the search bar and click **Save** icon to assign the category to the tools VM.
+#. **AppType:**\ *Initials*-**SecOps** を検索し、 **保存（Save）** をクリックし、VMにカテゴリを割り当てる。
 
    .. figure:: images/15.png
 
-Accessing and Quarantining the Desktops
+デスクトップへのアクセスおよび検疫
 +++++++++++++++++++++++++++++++++++++++
 
-#. From your *Initials*\ -**WinToolsVM**, open http://ddc.ntnxlab.local/Citrix/NTNXLABWeb in a browser to access the Citrix StoreFront server.
+#. *Initials*\ -**WinToolsVM** にてブラウザを開き、 http://ddc.ntnxlab.local/Citrix/NTNXLABWeb へアクセスし、Citrix StoreFront serverに接続する。
 
-#. Specify the following credentials and click **Log On**:
+#. 以下の資格情報で **Log On** する。:
 
    - **Username** - NTNXLAB\\devuser01
    - **Password** - nutanix/4u
 
-#. Select the **Desktops** tab and click your **Personal Win10 Desktop** to launch the session.
+#. **Desktops** タブで **Personal Win10 Desktop** を選択し、セッションを開始する。
 
-#. In addition, Open a **Command Prompt** on your *Initials*\ **WinToolsVM** and run ``ping -t XYZ-PD-1-VM-IP`` to verify connectivity between the windows tools client and the persistent desktop.
+#. また、 *Initials*\ **WinToolsVM** で **Command Prompt** を起動し、 ``ping -t XYZ-PD-1-VM-IP`` を実行しクライアントから仮想デスクトップへの疎通を確認する。（隔離後にどうなるか確認するため）
 
-#. In **Prism Central > Virtual Infrastructure > VMs**, select your *Initials*\ **-PD-1** and *Initials*\ **-PD-2** VMs .
+#. **Prism Central > 仮想インフラ（Virtual Infrastructure） > 仮想マシン（VMs）** と進み、 *Initials*\ **-PD-1** と *Initials*\ **-PD-2** のチェックボックスにチェックをいれる。
 
-#. Click **Actions > Quarantine VMs**.
+#. **アクション（Actions） > Quarantine VMs** をクリックする。
 
    .. figure:: images/1.png
 
-#. Select **Forensic** and click **Quarantine**.
+#. **フォレンジック（Forensic）** をクリックし、 **隔離（Quarantine）** をクリックする。
 
-   What happens with the continuous ping between the Windows Tools VM and the desktop?
+   Windows Tools VMから実行していたpingはどうなっていますか？
 
-Creating a Custom Quarantine Policy
+カスタムQuarantine Policyの作成
 +++++++++++++++++++++++++++++++++++
 
-#. In **Prism Central**, select :fa:`bars` **> Policies > Security Policies > Quarantine** to view all Quarantined VMs.
+#. **Prism Central** にて :fa:`bars` **> ポリシー（Policies） > セキュリティポリシー（Security Policies） > Quarantine** と進み、検疫中のVMを確認する。
 
-#. Click **Update** to edit the Quarantine policy.
+#. **更新（Update）** をクリックし、Quarantine policyを編集する。
 
-   To illustrate the capabilities of this special Flow policy, you will add your Windows Tools VM as a "forensic tool". In production, VMs allowed inbound access to quarantined VMs could be used to run security and forensic suites such as Kali Linux or SANS SIFT.
+   このFlowポリシーの機能を説明するために、Windows Tools VMを「フォレンジックツール」として追加します。本番環境では、隔離されたVMへのインバウンドアクセスを許可されたVMを使用して、Kali LinuxやSANS SIFTなどのセキュリティおよびフォレンジックスイートを実行できます。
 
-#. Click **Next** to navigate to the policy edit screen.
+#. **次へ（Next）** をクリックし、ポリシー編集画面に移動する。
 
-#. Under **Inbound**, click **+ Add Source**.
+#. **インバウンド（Inbound）** にて **+ 移行元を追加（+ Add Source）** をクリックする。
 
-#. Fill out the following fields:
+#. 以下を入力する。:
 
-   - **Add source by:** - Select **Category**
-   - Specify **AppType:**\ *Initials*-**SecOps**
+   - **Add source by:** - **Category（カテゴリ）** を選択
+   - **AppType:**\ *Initials*-**SecOps** を指定
 
    .. figure:: images/16.png
 
-#. Click **Add**
+#. **追加（Add）** をクリックする。
 
-   To what targets can this source be connected? What is the difference between the Forensic and Strict quarantine mode?
+   このソースはどのターゲットに接続できますか？ Forensic(フォレンジック)とStrict(厳格)の隔離モードの違いは何ですか？
 
-   Note that adding a VM to the **Strict** Quarantine policy disables all inbound and outbound communication to a VM. The **Strict** policy would apply to an VMs whose presence on the network poses a threat to the environment.
+   VMを **Strict** （厳格）な検疫ポリシーに追加すると、VMへのすべてのインバウンドおよびアウトバウンド通信が無効になることに注意してください。 **Strict** （厳格）なポリシーは、ネットワーク上の環境への脅威となる仮想マシンに適用します。
 
-#. Click the :fa:`plus-circle` icon to the left of **Quarantine: Forensic** to create an Inbound Rule.
+#. **Quarantine: フォレンジック（Forensic）** の左側にある :fa:`plus-circle` アイコンをクリックし、受信ルールを追加する。
 
-#. Click **Save** to allow any protocol on any port between the SecOps VM and the **Quarantine: Forensic** category.
+#. **保存（Save）** をクリックし、SecOpsカテゴリのVMと **Quarantine: フォレンジック（Forensic）** カテゴリのVMで、全てのポートのプロトコルを許可する。
 
    .. figure:: images/17.png
 
-#. Click **Next** and click **Apply Now** to save and apply the updated policy.
+#. **次へ（Next）** をクリックし、 **ここで適用する（Apply Now）** をクリックしてポリシーを適用する。
 
-   What happens to the pings to the desktop after the source is added?
+   Windows Tools VMから実行していたpingはどうなっていますか？
 
-#. You can remove the desktop VM from the **Quarantine: Forensic** category by selecting the VMs in Prism Central and clicking **Actions > Unquarantine VMs**.
+#. Prism CentralでVMを選択し、 **アクション（Actions） > Unquarantine VMs** をクリックして、 **Quarantine: フォレンジック（Forensic）** カテゴリからデスクトップVMを削除できます。
 
-Takeaways
+
+お持ち帰り
 +++++++++
 
-- In this exercise you utilized Flow to quarantine desktop VMs using the two modes of the quarantine policy, which are strict and forensic.
-- Quarantine policies are evaluated at a higher priority than application policies. A quarantine policy can block traffic that would otherwise be allowed by an application policy.
-- Forensic mode is key to allow limited access a quarantined VM while the VM is quarantined.
+- この演習では、Flowを使用して、厳密でフォレンジックな検疫ポリシーの2つのモードを使用してデスクトップVMを検疫しました。
+- 検疫ポリシーは、アプリケーションポリシーよりも高い優先度で評価されます。検疫ポリシーは、アプリケーションポリシーで許可されないトラフィックをブロックできます。
+- フォレンジックモードは、VMが隔離されている間、隔離されたVMへの制限付きアクセスを許可するためのキーです。

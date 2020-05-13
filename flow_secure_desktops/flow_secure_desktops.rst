@@ -1,154 +1,154 @@
 .. _ctxflow_secure_desktops:
 
 ---------------------------
-Securing Desktops with Flow
+Flowによるデスクトップの保護
 ---------------------------
 
-Another benefit of running virtual desktop workloads on Nutanix AHV is the ability to take advantage of native microsegmentation capabilities with Flow. Flow provides the ability to graphically monitor and model powerful East/West firewall rules between VMs, and control inbound and outbound access. This is perfect for applications such as web servers, or even desktops, where preventing the spread of VM to VM traffic is critical to stop attacks.
+Nutanix AHVで仮想デスクトップワークロードを実行するもう1つの利点は、Flowでネイティブのマイクロセグメンテーション機能を利用できることです。Flowは、VM間の強力なファイアウォールルールをグラフィカルに監視およびモデリングし、受信および送信アクセスを制御する機能を提供します。これは、Webサーバーやデスクトップなど、攻撃の阻止においてVMからVMへのトラフィックの拡散を防ぐことが重要なアプリケーションに最適です。
 
-**In this task we will place desktop VMs into an application policy as part of an application tier that restricts VM to VM communication within the tier. The desktops will have normal inbound and outbound access, but traffic between desktops will be blocked.**
+**この演習では、デスクトップVMをアプリケーションポリシーに配置して、同一Tier内の通信を制限します。デスクトップへの通信は可能ですが、デスクトップ間のトラフィックはブロックされることを確認します。**
 
-Categorizing the Desktop VMs
+デスクトップVMのカテゴライズ
 ++++++++++++++++++++++++++++
 
-#. In **Prism Central**, select :fa:`bars` **> Virtual Infrastructure > Categories**.
+#. **Prism Central** で :fa:`bars` **> 仮想インフラ（Virtual Infrastructure） > カテゴリ（Categories）** を選択する。
 
-#. Select the checkbox for **AppType** and click **Actions > Update**.
+#. **AppType** を選択し、 **アクション（Actions） > Update** をクリックする。
 
    .. figure:: images/1.png
 
-#. Click the :fa:`plus-circle` icon beside the last value to add an additional Category value.
+#. 最後のカテゴリの側にある :fa:`plus-circle` をクリックしカテゴリを追加する。
 
-#. Specify *Initials*-**Desktops**  as the value name.
+#. *Initials*-**Desktops** を入力する。
 
    .. figure:: images/2.png
 
-#. Click **Save**.
+#. **保存（Save）** をクリックする。
 
-#. Select the checkbox for **AppTier** and click **Actions > Update**.
+#. **AppTier** のチェックボックスを選択し、 **アクション（Actions） > Update** をクリックする。
 
-#. Click the :fa:`plus-circle` icon beside the last value to add an additional Category value.
+#. 最後のカテゴリの側にある :fa:`plus-circle` をクリックしカテゴリを追加する。
 
-#. Specify *Initials*-**PD**.
+#. *Initials*-**PD** を入力する。
 
-#. Click the :fa:`plus-circle` again and specify *Initials*-**NPD**.
+#. :fa:`plus-circle` を再度クリックし、 *Initials*-**NPD** を追加する。
 
    .. figure:: images/3.png
 
-#. Click **Save**.
+#. **保存（Save）** をクリックする。
 
-#. In **Prism Central**, select :fa:`bars` **> Virtual Infrastructure > VMs**.
+#. **Prism Central** にて :fa:`bars` **> 仮想インフラ（Virtual Infrastructure） > 仮想マシン（VMs）** と進む。
 
-#. Use the checkbox to select the persistent desktop VMs *Initials*\ -**PD** and navigate to **Actions > Manage Categories**.
+#. 永続デスクトップである *Initials*\ -**PD** をチェックボックスで選択し、 **アクション（Actions） > カテゴリの管理（Manage Categories）** と進む。
 
    .. figure:: images/4.png
 
-#. Specify **AppType:**\ *Initials*-**Desktops** in the search bar.
+#. 検索バーにて **AppType:**\ *Initials*-**Desktops** を検索する。
 
-#. Click the :fa:`plus-circle` icon beside the last value to add **AppTier:**\ *Initials*-**PD** and click the **Save**.
+#. 最後の項目の側にある :fa:`plus-circle` アイコンをクリックし、 **AppTier:**\ *Initials*-**PD** を選択し、 **保存（Save）** をクリックする。
 
    .. figure:: images/5.png
 
-#. Repeat the previous steps to assign the **AppType:**\ *Initials*-**Desktops** and **AppTier:**\ *Initials*-**NPD** categories to the non-persistent desktops.
+#. 先の手順を繰り返し、**AppType:**\ *Initials*-**Desktops** および **AppTier:**\ *Initials*-**NPD** カテゴリを非永続デスクトップに割り当てる。
 
-Creating a Desktop Security Policy
+セキュリティポリシーの作成
 ++++++++++++++++++++++++++++++++++
 
-#. In **Prism Central**, select :fa:`bars` **> Policies > Security Policies**.
+#. **Prism Central** で :fa:`bars` **> ポリシー（Policies） > セキュリティポリシー（Security Policies）** と進む。
 
-#. Click **Create Security Policy > Secure Applications (App Policy) > Create**.
+#. **セキュリティポリシーの作成（Create Security Policy） > セキュアアプリケーション（アプリケーションポリシー）（Secure Applications (App Policy)） > 作成（Create）** と進む。
 
-#. Fill out the following fields:
+#. 以下を入力する。:
 
-   - **Name** - *Initials*-Desktops
-   - **Purpose** - Restrict unnecessary traffic between desktops
-   - **Secure this app** - AppType: *Initials*-Desktops
-   - Do **NOT** select **Filter the app type by category**.
+   - **名前（Name）** - *Initials*-Desktops
+   - **目的（Purpose）** - Restrict unnecessary traffic between desktops
+   - **このアプリを保護（Secure this app）** - AppType: *Initials*-Desktops
+   - **カテゴリ別にアプリタイプにフィルターをかけます（Filter the app type by category）** は選択 **しない** 。
 
    .. figure:: images/6.png
 
-#. Click **Next**.
+#. **次へ（Next）** をクリックする。
 
-#. If prompted, click **OK, Got it!** on the tutorial diagram of the **Create App Security Policy** wizard.
+#. ナビゲートウィンドウが表示されたら、 **分かりました（OK, Got it!）** をクリックする。
 
-#. To allow for more granular configuration of the security policy, click **Set rules on App Tiers, instead** rather than applying the same rules to all desktop groups.
+#. より詳細にセキュリティポリシーを設定するために **代わりにアプリ階層にルールを設定します（Set rules on App Tiers, instead）** をクリックする。これによりAppType全体ではなく、カテゴリ単位で設定することができる。
 
    .. figure:: images/7.png
 
-#. Click **+ Add Tier**.
+#. **+ 階層を追加（Add Tier）** をクリックする。
 
-#. Select **AppTier:**\ *Initials*-**PD** from the drop down.
+#. ドロップダウンから、 **AppTier:**\ *Initials*-**PD** を選択する。
 
-#. Repeat Steps 7-8 for **AppTier:**\ *Initials*-**NPD**.
+#. **AppTier:**\ *Initials*-**NPD** に対して手順7-8を再度実施する。
 
    .. figure:: images/8.png
 
-   Next you will define the **Inbound** rules, which control which sources you will allow to communicate with your application. In this case we want to allow all inbound traffic.
+   次に、アプリケーションとの通信を許可するソースを制御するインバウンドルールを定義します。今回はすべての受信トラフィックを許可します。
 
-#. On the left side of the policy edit page, change **Inbound** from **Whitelist Only** to **Allow All**
+#. 画面左側にある **インバウンド（Inbound）** にて、 **ホワイトリストのみ（Whitelist Only）** から **全て許可（Allow All）** に変更する。
 
    .. figure:: images/9.png
 
-#. Repeat the previous step to also change **Outbound** to **Allow All**.
+#. 画面右側の **アウトバウンド（Outbound）** も同様に **全て許可（Allow All）** に変更する。
 
-#. To define intra-desktop communication, click **Set Rules within App**.
+#. デスクトップ内の通信制御を定義するために、 **アプリ内でルールを設定（Set Rules within App）** をクリックする。
 
    .. figure:: images/10.png
 
-#. Click **AppTier:**\ *Initials*-**PD** and select **No** to prevent communication between VMs in this tier. This will block persistent desktops from communicating with each other.
+#. **AppTier:**\ *Initials*-**PD** を選択し、同一Tier内のVM間通信を制限するために **No** を選択する。これにより、永続デスクトップ間の通信を制限することができる。
 
    .. figure:: images/11.png
 
-#. While **AppTier:**\ *Initials*-**PD** is still selected, click the :fa:`plus-circle` icon to the right of **AppTier:**\ *Initials*-**NPD** to create a tier to tier rule.
+#. **AppTier:**\ *Initials*-**PD** を選択した状態で **AppTier:**\ *Initials*-**NPD** の右側にある :fa:`plus-circle` アイコンをクリックし、ルールを作成する。
 
-#. Fill out the following fields to allow communication on TCP port **7680** between the persistent and non-persistent tiers to allow peer-to-peer Windows updates:
+#. 以下を入力し、非永続デスクトップと、永続デスクトップ間のTCP port **7680** を許可し、peer-to-peer のWindows update通信を許可する。:
 
    - **Protocol** - TCP
    - **Ports** - 7680
 
    .. figure:: images/12.png
 
-#. Click **Save**.
+#. **保存（Save）** をクリックする。
 
-#. Select **AppTier:**\ *Initials*-**NPD** and select **No** to block VM to VM communication for the non-persistent desktops.
+#. **AppTier:**\ *Initials*-**NPD** を選択し、同一Tier内のVM間通信を制限するために **No** を選択する。
 
-#. Click **Next** to review the security policy.
+#. **次へ（Next）** をクリックし、設定したsecurity policyのルールを確認する。
 
-#. Click **Save and Monitor** to save the policy.
+#. **保存とモニター（Save and Monitor）** をクリックし、ポリシーを保存する。
 
-Verifying Desktop Security
+セキュリティールールの検証
 ++++++++++++++++++++++++++
 
-#. Use the Prism Central VM list to note the IP addresses of your persistent desktops.
+#. Prism Central にて永続デスクトップVMのIPアドレスを確認し、控えておきます。
 
-#. From your *Initials*\ -**WinToolsVM**, open http://ddc.ntnxlab.local/Citrix/NTNXLABWeb in a browser to access the Citrix StoreFront server.
+#. *Initials*\ -**WinToolsVM** にてブラウザを起動し、http://ddc.ntnxlab.local/Citrix/NTNXLABWeb にアクセスしCitrix StoreFront serverに接続する。
 
-#. Specify the following credentials and click **Log On**:
+#. 以下の資格情報を入力し **Log On** をクリックする。:
 
    - **Username** - NTNXLAB\\devuser01
    - **Password** - nutanix/4u
 
-#. Select the **Desktops** tab and click your **Personal Win10 Desktop** to launch the session.
+#. **Desktops** タブを選択し、 **Personal Win10 Desktop** をクリックしてセッションを開始する。。
 
-#. In the persistent desktop, Open a **Command Prompt** and run ``ping -t XYZ-PD-VM-IP`` to verify connectivity between the persistent desktops.
+#. 永続デスクトップにて **Command Prompt** を起動し、 ``ping -t XYZ-PD-VM-IP`` を実行し、永続デスクトップ間の通信を確認する。
 
    .. figure:: images/13.png
 
-   Can you ping between the desktops now? Why?
+   疎通は通りますか？またなぜその状態になるでしょうか？
 
-#. In **Prism Central > Policies > Security Policies**, select the *Initials*\ **-Desktops** policy.
+#. **Prism Central > ポリシー（Policies） > セキュリティポリシー（Security Policies）** と進み、 *Initials*\ **-Desktops** ポリシーを選択する。
 
-#. Click **Actions > Apply**.
+#. **アクション（Actions） > 適用（Apply）** をクリックする。
 
    .. figure:: images/14.png
 
-#. Type **APPLY** and click **OK** to apply the Desktop security policy.
+#. ポリシーを適用するために **APPLY** 、 **OK** をクリックする。
 
-   What happens to the continuous ping between the desktops?
+   先ほど実行した疎通はどうなりましたか？
 
-Takeaways
+お持ち帰り
 +++++++++
 
-- In this exercise you utilized Flow to block traffic between desktops to prevent the spread of malware.
-- Monitor mode is used to visualize traffic to the defined application, but Apply mode enforces the policy.
-- Application policies can be used to protect desktops as well as traditional applications.
+- この演習では、Flowを使用してデスクトップ間のトラフィックをブロックし、マルウェアの環境内拡散を防ぎました。
+- Monitor（監視）モードは定義されたアプリケーションへのトラフィックを視覚化するために使用され、Apply（適用）モードはポリシーを実行します。
+- アプリケーションポリシーは、従来のアプリケーションと同様にデスクトップを保護するために使用できます。

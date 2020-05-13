@@ -1,118 +1,118 @@
 .. _citrixmanage:
 
 ------------------------------
-Managing Citrix Desktops
+Citrix Desktopsの管理
 ------------------------------
 
-The combination of Nutanix, AHV, and XenDesktop make for a smooth experience in deploying new infrastructure and virtual desktops - but what about as that environment changes and expands?
+Nutanix、AHV、XenDesktopの組み合わせにより、新しいインフラストラクチャと仮想デスクトップの展開がスムーズになりますが、その環境が変化し、拡大するとどうなりますか？
 
-**In this exercise you will perform "Day 2" operations for a XenDesktop environment, including expanding an existing Machine Catalog with more desktop VMs, and rolling out an updated gold image to your non-persistent Machine Catalog.**
+**この演習では、XenDesktop環境で "Day 2" の操作を実行します。これには、より多くのデスクトップVMで既存のマシンカタログを拡張し、更新されたゴールドイメージを非永続マシンカタログに展開します。**
 
-Adding More Desktops
+デスクトップの追加
 ++++++++++++++++++++
 
-Nutanix makes it simple to expand a cluster by 1 or more nodes through a One Click operation in Prism. In the below exercise, you'll expand your pool of virtual desktops to take advantage of the compute and storage resources that you're able to expand at will.
+Nutanixを使用すると、Prismのワンクリック操作で1ノード以上クラスターを簡単に拡張できます。以下の演習では、仮想デスクトップのプールを拡張して、自由に拡張できるコンピューティングリソースとストレージリソースを活用します。
 
-#. In **Citrix Studio > Machine Catalogs**, right-click your Non-Persistent Machine Catalog and select **Add Machines**.
+#. **Citrix Studio > Machine Catalogs** と進み、非永続マシンカタログを右クリックし **Add Machines** を選択する。
 
    .. figure:: images/1.png
 
-#. Specify **1** as the **Number of machines to add** and click **Next**.
+#. **Number of machines to add** に **1** を指定し、 **Next** をクリックする。
 
-#. Confirm the existing OU and naming scheme and click **Next**.
+#. 既存のOUと naming scheme を確認し、 **Next** をクリックする。
 
    .. figure:: images/2.png
 
-#.Review configuration and click **Finish**.
+#. 設定内容を確認し、 **Finish** をクリックする。
 
-#. In **Citrix Studio > Delivery Groups**, right-click your Non-Persistent Delivery Group and select **Add Machines**.
+#. **Citrix Studio > Delivery Groups**　と進み、非永続デリバリーグループを右クリックし、 **Add Machines** をクリックする。
 
    .. figure:: images/3.png
 
-#. Specify **1** as the **number of Machines for this Delivery Group** and click **Next > Finish**.
+#. **number of Machines for this Delivery Group** に **1** を指定し、 **Next > Finish** をクリックする。
 
    .. note::
 
-      Double-click the Non-Persistent Delivery Group and observe that the new desktop is powered off. This is due to the Power Management settings configured in :ref:`citrixnpdesktops`.
+      非永続Delivery Groupをダブルクリックして、新しいデスクトップの電源がオフになっていることを確認します。これは :ref:`citrixnpdesktops` 演習で設定した電源管理設定による動作です。
 
-#. Edit the Non-Persistent Delivery Group **Power Management** to increment the number of powered on machines.
+#. 非永続 Delivery Groupの **Power Management** を編集してパワーオン状態の仮想マシン数を増やす。
 
-#. Observe the additional *Initials*\ **-NP-#** VM is then powered on in **Prism** and soon appears Registered in **Citrix Studio**.
+#. 追加した *Initials*\ **-NP-#** VM　が **Prism** でパワーオンになっていることを確認し、 **Citrix Studio** で登録済みと表示されることを確認する。
 
    .. figure:: images/4.png
 
-Updating the Gold Image
+ゴールドイメージの更新
 +++++++++++++++++++++++
 
-One of the key benefits of non-persistent desktops is the ability to uniformly roll out updates to a large number of systems after only having made the change to your master image. In the exercise below you'll walk through how fast and easy that process is with Citrix on AHV.
+非永続デスクトップの主な利点の1つは、マスターイメージに変更を加えただけで、更新を多数のシステムに均一に展開できることです。以下の演習では、AHV上のCitrixを使用したプロセスがどれほど高速で簡単であるかを説明します。
 
-#. Power on your *Initials*\ **-GoldImage** VM and connect via VM console or RDP.
+#. *Initials*\ **-GoldImage** VMの電源をONにし、コンソール接続する。
 
-#. Within your **GoldImage** VM, install or update an application (e.g. PuTTY, Atom, 7Zip, etc.) and then shut down the VM.
+#. **GoldImage** VMでアプリケーションをインストールし (例 PuTTY, Atom, 7Zip, など) VMをシャットダウンする。
 
    .. note::
 
-      Your user is not part of the **Local Administrators** group, so you may be unable to install certain applications. If you encounter an error trying to install an application, hold the **Shift** key, right-click the installer, and select **Run as different user**. Use your NTNXLAB\\Administrator credentials to complete the installation.
+      ユーザーはローカル管理者グループのメンバーではないため、特定のアプリケーションをインストールできない場合があります。アプリケーションのインストール中にエラーが発生した場合は、Shiftキーを押しながらインストーラーを右クリックし、[ 別のユーザーとして実行 ]を選択します。NTNXLAB \ Administrator資格情報を使用して、インストールを完了します。
 
    .. figure:: images/5.png
 
-#. Once the *Initials*\ **-GoldImage** VM is powered off, select the VM in **Prism Element** and click **Take Snapshot**.
+#. *Initials*\ **-GoldImage** VMの電源が落ちたら **Prism Element** で対象VMを選択し、 **Take Snapshot** をクリックする。
 
    .. note::
 
-      As a reminder, the snapshot can **ONLY** be taken in Prism Element in order to be recognized by the Citrix AHV plug-in.
+      スナップショットは、Citrix AHVプラグインで認識されるように、Prism Elementで取得する必要があります。
 
    .. figure:: images/6.png
 
-#. Specify a **Name** for the snapshot (e.g. "*Initials*\ -GoldImage vYYYYMMDD-X - Installed 7zip") and click **Submit**.
+#. スナップショットの **Name** を設定し (例 "*Initials*\ -GoldImage vYYYYMMDD-X - Installed 7zip")  **Submit** をクリックする。
 
-#. In **Citrix Studio > Machine Catalogs**, right-click your Non-Persistent Machine Catalog and select **Update Machines**.
+#. **Citrix Studio > Machine Catalogs** で非永続マシンカタログを右クリックし **Update Machines** を選択する。
 
    .. note::
 
-     Update Machines is not available for your Persistent Machine Catalog as updates to persistent desktops are handled via traditional patch management tools.
+     永続デスクトップの更新をするためには、別途パッチ管理ツールなどが必要であるため、永続マシンカタログではマシンの更新はできません。
 
 #. Click **Next**.
 
-#. Select your updated *Initials*\ **-GoldImage** VM snapshot and click **Next**.
+#. 作成した*Initials*\ **-GoldImage** VM snapshotを選択し、 **Next** をクリックする。
 
    .. figure:: images/7.png
 
-#. Fill out the following fields and click **Next**:
+#. 以下を入力し **Next** をクリックする。
 
-   - Select **Immediately (shut down and restart the machine now)**
+   - **Immediately (shut down and restart the machine now)** を選択
    - **Distribution time** - Update all machines at the same time
    - **Notify users of the update** - Do not send a notification
 
    .. note::
 
-     These choices are based on wanting to roll out an update as quickly as possible, but note Studio provides maximum flexibility for Rollout Strategy, allowing Administrators to proactively notify users and stagger gold image deployment for large pools over the period of several hours.
+     これらの選択は、更新をできるだけ迅速に展開することに基づいています。Studioは、管理者がプロアクティブにユーザーに通知し、また数時間にわたる大きなプールのゴールドイメージ展開をずらすことができるようにするなど、ロールアウト戦略に最大限の柔軟性を提供します。
 
-#. Review configuration and click **Finish**.
+#. 構成を確認し、 **Finish** をクリックする。
 
-   A new preparation VM will be cloned and booted to prepare the new snapshot.
+   新しいスナップショットを準備するために、新しい準備VMが複製および起動されます。
 
    .. figure:: images/8.png
 
-#. After the preparation VM is shut down and removed, **Prism > Tasks** will display the changing power state of VMs as they're powered off. After several minutes you'll see VM disk update tasks, which is MCS updating the cloned disk for the provisioned VMs to point to the new prepared snapshot.
+#. PreparationVMがシャットダウンされ、削除された後、 **Prism > Tasks** で、VMの電源がOFFにされたタスクを確認する。数分後、VMディスクの更新タスクが表示される。　※これは、プロビジョニングされたVMのクローンディスクをMCSが更新して、新しく準備されたスナップショットを指すようにするタスクです。
 
    .. figure:: images/9.png
 
-#. Log in to Citrix StoreFront as **NTNXLAB\\operator01** and launch your **Pooled** desktop to verify the presented desktop reflects the updated image.
+#. Citrix StoreFrontに **NTNXLAB\\operator01** としてログインし、 **Pooled** されたデスクトップを起動し、提示されたデスクトップが更新されたイメージを反映していることを確認する。
 
    .. figure:: images/10.png
 
-#. In **Citrix Studio > Machine Catalogs**, observe that you now have an option to rollback your Non-Persistent Machine Catalog to the previous snapshot.
+#. **Citrix Studio > Machine Catalogs** にて、非永続マシンカタログを以前のスナップショットへロールバックするためのオプションがあることを確認する。
 
    .. figure:: images/11.png
 
-Takeaways
+お持ち帰り
 +++++++++
 
-- Adding capacity to an existing Machine Catalog can be done rapidly. Combined with Nutanix's ability to expand a physical cluster with a One Click operation, this enables an IT organization to be very responsive to changing business needs.
+- 既存のマシンカタログへの容量の追加は迅速に実行できます。ワンクリック操作で物理クラスターを拡張するNutanixの機能と組み合わせると、IT組織は変化するビジネスニーズに非常に迅速に対応できます。
 
-- A Nutanix AHV cluster does not have to bottleneck cloning and power operations through a service similar to vCenter or SCVMM, meaning the ability to support more simultaneous operations scales out with the cluster. This scale out architecture compliments VDI operations such as expanding or updating a Machine Catalog.
+- Nutanix AHVクラスターは、vCenterまたはSCVMMのように、サービスを介することでクローン作成および電源操作がボトルネックになるということがありません。つまり、より多くの同時操作をサポートする機能がクラスターと共にスケールアウトします。このスケールアウトアーキテクチャは、マシンカタログの拡張や更新などのVDI操作を補完します。
 
-- Nutanix creates separate block maps (metadata mapping a vDisk to its corresponding extents) for each new snapshot created, eliminating the additional overhead and read latency common with large snapshot chains traditionally seen in other hypervisors. Gold image management is simplified by not having to mitigate the performance impact of snapshot chains.
+- Nutanixは、作成された新しいスナップショットごとに個別のブロックマップ（vDiskを対応するエクステントにマッピングするメタデータ）を作成することで、他のハイパーバイザーで従来見られていた大きなスナップショットチェーンによる追加オーバーヘッドと読み取りレイテンシを排除します。ゴールドイメージ管理は、スナップショットチェーンのパフォーマンスへの影響を軽減する必要がないため、簡素化されます。
 
-- Gold image versioning with MCS can be implemented easily through snapshot naming conventions.
+- MCSを使用したゴールドイメージのバージョン管理は、スナップショットの命名規則を使用して簡単に実装できます。

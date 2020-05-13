@@ -1,48 +1,45 @@
 .. _citrixgettingstarted:
 
 ----------------------
-Getting Started
+事前準備
 ----------------------
 
-Welcome to the End User Computing bootcamp featuring Citrix Apps & Desktops. This bootcamp is meant to provide you with first hand experience in why Nutanix is an ideal platform for Citrix workloads. In addition to the benefits than Nutanix HCI brings to any virtual desktop deployment, such as linear scalability and consistent performance, Nutanix brings additional benefits that you'll explore through labs:
+Citrix Apps＆Desktopsをフィーチャーしたエンドユーザーコンピューティングブートキャンプへようこそ。このブートキャンプは、NutanixがCitrixワークロードに理想的なプラットフォームである理由を体験することを目的としています。
+Nutanix HCIのスケーラビリティや一貫したパフォーマンスなど、仮想デスクトップにもたらす利点に加えて、以下に記載するような利点を体験頂きます。
 
-- Native tools for migrating existing desktop images from ESXi
-- Citrix integration with AHV to provide a no-cost, easy to manage platform for desktop virtualization
-- Fast desktop provisioning, including rolling out image updates to large pools of desktops
-- Native file services with Nutanix Files to deliver user data, profiles, and User Personalization Layers
-- Native microsegmentation with Nutanix Flow to secure a virtual desktop environment
-- Rich monitoring and automation capabilities with Prism Ops
+- CitrixとライセンスフリーのAHVの統合により、デスクトップ仮想化のための管理しやすいプラットフォームを提供
+- デスクトップの大規模なプールへのイメージ更新の適用を含む、高速なデスクトッププロビジョニング
+- ユーザーデータ、プロファイル、ユーザーパーソナライゼーションレイヤーを提供するNutanix Filesを使用したファイルサービス
+- 仮想デスクトップ環境を保護するためのNutanix Flowによるマイクロセグメンテーション
+- Prism Proによる豊富な監視および自動化機能
 
-
-Deploying your Windows Tools VM
+Windows Tools VMのデプロイ
 +++++++++++++++++++++++++++++++
 
-#. In **Prism Central**, select :fa:`bars` **> Virtual Infrastructure > VMs**.
+#. Prism Centralで :fa:`bars` > **仮想インフラ（Virtual Infrastructure）** > **仮想マシン（VMs）** を選択。
 
-#. Click **Create VM**.
+#. **仮想マシンを作成（Create VM）** をクリック
 
-#. Select your assigned cluster and click **OK**.
-
-#. Fill out the following fields:
+#. 以下を入力する:
 
    - **Name** - *Initials*-WinToolsVM
-   - **Description** - (Optional) Description for your VM.
+   - **Description** - WinToolsVM
    - **vCPU(s)** - 2
    - **Number of Cores per vCPU** - 1
    - **Memory** - 4 GiB
 
-   - Select **+ Add New Disk**
-      - **Type** - DISK
-      - **Operation** - Clone from Image Service
-      - **Image** - WinToolsVM.qcow2
-      - Select **Add**
+   - **+ Add New Disk** をクリック
+      - **Type（タイプ）** - DISK
+      - **Operation（オペレーション）** - Clone from Image Service（イメージサービスからクローン）
+      - **Image（イメージ）** - WinToolsVM.qcow2
+      - **Add** をクリック
 
-   - Select **Add New NIC**
+   - **Add New NIC** をクリック
       - **VLAN Name** - Secondary
-      - Select **Add**
+      - **Add** をクリック
 
-#. Click **Save** to create the VM.
+#. **Save** をクリックしVMを作成する.
 
-#. Select your VM and click **Actions > Power On**.
+#. 作成したVMのチェックボックスをクリックし **Actions（アクション） > Power On（パワーオン）** .
 
-   Once booted, the VM will automatically complete the Sysprep process, join the **NTNXLAB.local** domain, and log in as the **NTNXLAB\\Administrator** user.
+　　起動すると、自動的にSysprepの処理が走り、 **NTNXLAB.local** ドメインに参加し、**NTNXLAB\\Administrator** としてログインします。
