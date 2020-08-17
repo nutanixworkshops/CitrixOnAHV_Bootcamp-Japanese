@@ -185,7 +185,7 @@ XenDesktopサイトには、スケールアウトして大規模化する環境�
 デスクトップへの接続
 +++++++++++++++++++++++++
 
-#. *Initials*\ **ToolsVM** にてブラウザを開き http://ddc.ntnxlab.local/Citrix/NTNXLABWeb を入力しCitrix StoreFront serverにアクセスする 。
+#. *Initials-*\ **ToolsVM** にてブラウザを開き http://ddc.ntnxlab.local/Citrix/NTNXLABWeb を入力しCitrix StoreFront serverにアクセスする 。
 
 #. **Detect Receiver** をクリックし、 ライセンスに承諾し **Download** をクリックし、**Citrix Workspace App** をダウンロードする。
 
@@ -195,7 +195,7 @@ XenDesktopサイトには、スケールアウトして大規模化する環境�
 
       Citrixデスクトップおよびアプリケーションにアクセスするためのクライアントとして使用されるCitrix Workspaceアプリケーションは、以前はCitrix Receiverと呼ばれていました。
 
-#. **CitrixWorkspaceApp.exe** インストーラーを起動し、完了します。 ※Single Sign-On を有効に **しない** 。
+#. **CitrixWorkspaceApp.exe** インストーラーを起動しウィザードに従ってインストールします。 ※Single Sign-On を有効に **しない** でインストールしてください。
 
 #. インストール完了後、ブラウザに戻り **Continue** をクリック。
 
